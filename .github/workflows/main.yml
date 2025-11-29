@@ -1,0 +1,27 @@
+name: Despliege Web App Astro
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'webapp/**'
+
+jobs:
+  build_and_deploy:
+    name: Build and Deploy Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del código
+        uses: actions/checkou@v4
+        with:
+          submodules: true
+          
+      - name: Construir y Desplegar App Astro
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          action: upload
+          app_location: "/webapp"
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          OUTPUT_LOCATION: "dist"
+    
