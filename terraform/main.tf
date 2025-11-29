@@ -12,3 +12,9 @@ resource "azurerm_static_web_app" "web_portfolio" {
     ManagedBy = "Terraform"
   }
 }
+
+resource "azurerm_static_web_app_custom_domain" "domain" {
+  static_web_app_id = azurerm_static_web_app.web_portfolio.id
+  domain_name = "www.ivelinapostolov.com"
+  validation_type = "cname-delegation"
+}
