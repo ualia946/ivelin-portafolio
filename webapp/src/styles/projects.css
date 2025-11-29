@@ -1,0 +1,45 @@
+@keyframes gradientLava {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Animación para las cards */
+.project-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  pointer-events: auto;
+}
+
+.project-hidden {
+  opacity: 0;
+  transform: translateY(8px) scale(0.98);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  pointer-events: none;
+}
+
+/* Botones de filtrado no activos */
+.filter-btn {
+  opacity: 0.4;
+  transition: 0.18s ease;
+}
+
+/* Botón activo */
+.filter-btn.active {
+  transform: scale(1.05);
+  opacity: 1;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}

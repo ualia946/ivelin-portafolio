@@ -1,0 +1,40 @@
+---
+const githubUrl = "https://github.com/ualia946";
+const imageUrl = "/github.png";
+---
+
+<section class="mt-16 flex justify-center px-4">
+	<div
+		class="mx-auto max-h-80 w-full max-w-[1120px] overflow-hidden rounded-2xl bg-linear-to-r from-[#211355] to-[#12186e] text-white shadow-lg drop-shadow-[4px_4px_0_#7836cf]"
+	>
+		<div class="flex h-full flex-col items-center md:flex-row-reverse md:items-start">
+			<!-- Logo GitHub -->
+			<div class="flex h-full w-full shrink-0 items-center justify-center md:w-auto md:justify-end">
+				<a href={githubUrl} target="_blank" rel="noopener noreferrer">
+					<img
+						src={imageUrl}
+						alt="GitHub Logo"
+						class="h-auto w-72 cursor-pointer object-contain transition hover:scale-105 md:w-[470px]"
+					/>
+				</a>
+			</div>
+
+			<!-- Texto y botón -->
+			<div class="flex-1 p-4 text-center md:p-8 md:text-left">
+				<h3 class="text-5xl font-bold md:text-4xl">¡Visita mi GitHub!</h3>
+				<p class="mt-2 text-sm md:text-xl">
+					Hola! te invito a mi perfil de GitHub para que puedas explorar mis proyectos y
+					contribuciones más recientes.
+				</p>
+				<a
+					href={githubUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="mt-4 inline-block rounded-full bg-white px-6 py-3 font-semibold text-black transition hover:bg-gray-200"
+				>
+					Ir a GitHub
+				</a>
+			</div>
+		</div>
+	</div>
+</section>

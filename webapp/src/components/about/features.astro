@@ -1,0 +1,32 @@
+---
+import ServiceCard from "./ServiceCard.astro";
+import { FaLaptopCode, FaBolt, FaRocket } from "react-icons/fa"; 
+---
+
+<section class="site-container mt-14 mx-auto max-w-6xl px-4">
+	<h2
+		class="text-4xl font-bold flex flex-col items-center gap-6 text-center whitespace-nowrap text-white md:flex-row md:items-center md:text-end"
+	>
+		<span class="hidden h-1.5 grow rounded-lg drop-shadow-[2px_2px_0_#0debd8] bg-[#7836cf] md:block"></span>
+		<span class="drop-shadow-[2px_2px_0_#7836cf]">Servicios</span>
+	</h2>
+
+	<div class="mt-10 grid gap-6 md:grid-cols-3">
+		<ServiceCard
+			icon={FaLaptopCode}
+			title="Cloud Architecture"
+			description="Diseño y despliegue de infraestructuras escalables en la nube que crecen con tu negocio, garantizando disponibilidad y rendimiento."
+		/>
+		<ServiceCard
+			icon={FaBolt}
+			title="Automatización & Eficiencia"
+			description="Automatizo procesos operacionales complejos para reducir errores manuales, acelerar entregas y minimizar tiempos de downtime."
+		/>
+
+		<ServiceCard
+			icon={FaRocket}
+			title="Seguridad & Confiabilidad"
+			description="Implemento arquitecturas seguras con modelos Zero Trust y sistemas resilientes que protegen tus datos y garantizan continuidad operacional."
+		/>
+	</div>
+</section>

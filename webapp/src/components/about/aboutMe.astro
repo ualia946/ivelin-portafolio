@@ -1,0 +1,42 @@
+---
+import MiFoto from "../../assets/img/MiFoto.jpg";
+---
+
+<!-- Contenedor principal -->
+<div
+  class="mx-auto mt-20 flex max-w-6xl flex-col items-center gap-8 px-6 lg:flex-row "
+>
+  <!-- Imagen -->
+  <div
+    class="border-primary h-64 w-64 overflow-hidden rounded-2xl shadow-lg md:h-96 md:w-96 drop-shadow-[4px_4px_0_#7836cf]"
+  >
+    <img
+      src={MiFoto.src}
+      alt="Foto de Lautaro"
+      class="h-full w-full object-cover"
+    />
+  </div>
+
+  <!-- Texto -->
+  <div class="flex-1 text-center text-gray-300 lg:text-left">
+    <h2 class="text-3xl font-bold text-white">
+      Soy <span class="text-white text-shadow">Ivelin</span>
+    </h2>
+    <p class="mt-4">
+      <span class="text-primary font-semibold">Ingeniero Informático</span> de
+      <span class="text-primary font-semibold">Almería, España</span> , especializado en
+      <span class="text-primary font-semibold">Cloud Computing (Azure), DevOps e Ingeniería de Sistemas</span>.
+      Construyo infraestructuras robustas, automatizo procesos complejos y diseño arquitecturas seguras que reducen errores y aceleran la entrega de software.
+    </p>
+    <p class="mt-2">
+      Mi enfoque es <span class="text-primary font-semibold">transformar operaciones manuales en procesos automatizados</span>:
+      he implementado pipelines CI/CD que aceleran despliegues de horas a minutos, orquestado infraestructuras en Kubernetes con modelos Zero Trust, y diseñado sistemas de monitorización que detectan problemas antes de que afecten a los usuarios.
+    </p>
+    <p class="mt-2">
+      Manejo desde la <span class="text-primary font-semibold">arquitectura de redes</span> en Azure hasta la
+      <span class="text-primary font-semibold">administración de sistemas Linux</span>, pasando por
+      <span class="text-primary font-semibold">Terraform, Docker, GitHub Actions y análisis de datos con Power BI</span>.
+      Mi objetivo es aportar soluciones que no solo funcionen, sino que escalen, sean seguras y requieran el mínimo mantenimiento manual.
+    </p>
+  </div>
+</div>

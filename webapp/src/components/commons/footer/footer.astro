@@ -1,0 +1,53 @@
+---
+import SocialIcons from "../socialIcons/socialIcons.jsx";
+---
+
+<footer class="bg-gray-950 text-white">
+  <div
+    class="container mx-auto flex flex-col items-center justify-between px-6 py-12 lg:flex-row lg:px-20"
+  >
+    <!-- Logo -->
+    <a href="/" class="flex items-center">
+      <h3
+        class="text-[#69c7c7] text-4xl font-bold drop-shadow-[1.5px_1.5px_0_#7836cf]"
+      >
+        IA
+      </h3>
+    </a>
+
+    <!-- Navigation Links -->
+    <nav class="mb-4 lg:mb-0">
+      <ul
+        class="flex flex-col items-center space-y-2 text-gray-400 lg:flex-row lg:items-start lg:space-y-0 lg:space-x-6"
+      >
+        <li>
+          <a href="/" class="hover:text-[#552496] font-semibold">Inicio</a>
+        </li>
+        <li>
+          <a href="/proyectos" class="hover:text-[#552496] font-semibold"
+            >Proyectos</a>
+        </li>
+        <li>
+          <a href="/about" class="hover:text-[#552496] font-semibold"
+            >Sobre Mi</a>
+        </li>
+        <li>
+          <a href="/contact" class="hover:text-[#552496] font-semibold"
+            >Contacto</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Social Media Links -->
+    <div class="flex space-x-4 ">
+      <SocialIcons client:visible />
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div
+    class="w-full border-t border-gray-600 py-10 text-center text-sm text-gray-500"
+  >
+    2004ivchoapostolov@gmail.com
+  </div>
+</footer>

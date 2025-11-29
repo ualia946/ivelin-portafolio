@@ -1,0 +1,168 @@
+---
+import "../styles/projects.css";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/commons/hero/hero.astro";
+import ProjectCard from "../components/project/proyectCard.astro";
+import Banner from "../components/commons/banners/banner.astro";
+import { proyectos } from "../data/projectData.js";
+---
+
+<Layout title="Proyectos" description="Proyectos">
+  <Hero titulo="Proyectos" />
+
+  <!-- Botones -->
+  <div class="mt-6 mb-6 flex flex-wrap justify-center gap-3 px-2">
+    <button class="filter-btn cursor-pointer rounded-full bg-[#69c7c7] px-5 py-1.5 text-sm font-bold text-[#1d1250] drop-shadow-[2px_2px_0_#7836cf] transition-all duration-150 active:translate-y-0.5 active:drop-shadow-none" data-filter="all">
+      Todos
+    </button>
+    <button class="filter-btn cursor-pointer rounded-full bg-[#69c7c7] px-5 py-1.5 text-sm font-bold text-[#1d1250] drop-shadow-[2px_2px_0_#7836cf] transition-all duration-150 active:translate-y-0.5 active:drop-shadow-none" data-filter="cloud">
+      Cloud
+    </button>
+    <button class="filter-btn cursor-pointer rounded-full bg-[#69c7c7] px-5 py-1.5 text-sm font-bold text-[#1d1250] drop-shadow-[2px_2px_0_#7836cf] transition-all duration-150 active:translate-y-0.5 active:drop-shadow-none" data-filter="security">
+      Security
+    </button>
+    <button class="filter-btn cursor-pointer rounded-full bg-[#69c7c7] px-5 py-1.5 text-sm font-bold text-[#1d1250] drop-shadow-[2px_2px_0_#7836cf] transition-all duration-150 active:translate-y-0.5 active:drop-shadow-none" data-filter="ai">
+      AI
+    </button>
+  </div>
+
+  <!-- Cards -->
+  <div
+    id="projects-container"
+    class="4xl:px-96 flex flex-wrap justify-center gap-5 px-3 pt-5 xl:px-32 2xl:px-60"
+  >
+    {
+      proyectos.map((proyecto, index) => (
+        <ProjectCard
+          index={index}
+          titulo={proyecto.titulo}
+          descripcion={proyecto.descripcion}
+          imagen={proyecto.imagen}
+          tecnologias={proyecto.tecnologias}
+          demo={proyecto.demo}
+          codigo={proyecto.codigo}
+          categoria={proyecto.categoria}
+        />
+      ))
+    }
+  </div>
+
+  <!-- Ver el resto de los proyectos -->
+  <div class="flex justify-center mt-8">
+    <button
+      id="load-more"
+      class="px-6 py-2 cursor-pointer bg-[#69c7c7] text-[#1d1250] font-bold rounded-full hover:bg-[#46caca] drop-shadow-[2px_2px_0_#7836cf] active:translate-y-0.5 active:drop-shadow-none transition-all"
+    >
+      Ver más
+    </button>
+  </div>
+
+  <Banner />
+</Layout>
+
+<script is:inline>
+(function () {
+  /* ---------------- CONFIG ---------------- */
+  const VISIBLE_CLASS = "project-visible";
+  const HIDDEN_CLASS = "project-hidden";
+  const HIDE_TIMEOUT = 300;
+
+  const INITIAL_VISIBLE = 12;
+  let itemsToShow = INITIAL_VISIBLE;
+  let activeFilter = "all";
+  let cards = [];
+  let filterButtons = [];
+  let loadMoreBtn = null;
+
+  /* ---------------- HELPERS ---------------- */
+  function queryElements() {
+    cards = Array.from(document.querySelectorAll("[data-index]"));
+    filterButtons = Array.from(document.querySelectorAll(".filter-btn"));
+    loadMoreBtn = document.getElementById("load-more");
+  }
+
+  function showCard(card) {
+    card.style.display = "flex";
+    requestAnimationFrame(() => {
+      card.classList.remove(HIDDEN_CLASS);
+      card.classList.add(VISIBLE_CLASS);
+    });
+  }
+
+  function hideCard(card) {
+    card.classList.remove(VISIBLE_CLASS);
+    card.classList.add(HIDDEN_CLASS);
+    setTimeout(() => {
+      if (card.classList.contains(HIDDEN_CLASS)) {
+        card.style.display = "none";
+      }
+    }, HIDE_TIMEOUT);
+  }
+
+  function setActiveButton(btn) {
+    filterButtons.forEach((b) => b.classList.remove("active"));
+    if (btn) btn.classList.add("active");
+  }
+
+  /* ---------------- FILTRADO ---------------- */
+  function applyFilter(filter) {
+    activeFilter = filter ?? "all";
+    const normalized = activeFilter.toLowerCase();
+
+    cards = Array.from(document.querySelectorAll("[data-index]"));
+
+    const filteredCards = cards.filter((card) => {
+      const categoria = (card.dataset.categoria ?? "").toLowerCase();
+      return normalized === "all" || categoria === normalized;
+    });
+
+    cards.forEach((c) => hideCard(c));
+
+    filteredCards.forEach((card, i) => {
+      if (i < itemsToShow) showCard(card);
+    });
+
+    // botón ver más visible solo si hay más para ver
+    if (!loadMoreBtn) return;
+    loadMoreBtn.style.display = filteredCards.length > itemsToShow ? "block" : "none";
+  }
+
+  /* ---------------- Filtros eventos ---------------- */
+  function attachFilterEvents() {
+    if (!filterButtons.length) return;
+    filterButtons.forEach((btn) => {
+      btn.onclick = () => {
+        itemsToShow = INITIAL_VISIBLE; 
+        const filter = btn.dataset.filter || "all";
+        setActiveButton(btn);
+        applyFilter(filter);
+      };
+    });
+
+    // activar "Todos" al inicio
+    const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+    setActiveButton(allBtn);
+  }
+
+  /* ---------------- Ver mas ---------------- */
+  function attachLoadMore() {
+    if (!loadMoreBtn) return;
+    loadMoreBtn.onclick = () => {
+      itemsToShow += INITIAL_VISIBLE; 
+      applyFilter(activeFilter); 
+    };
+  }
+
+  /* ---------------- INIT ---------------- */
+  function init() {
+    queryElements();
+    attachFilterEvents();
+    attachLoadMore();
+    applyFilter("all");
+  }
+
+  document.addEventListener("astro:page-load", init);
+  window.addEventListener("load", init);
+})();
+</script>
+

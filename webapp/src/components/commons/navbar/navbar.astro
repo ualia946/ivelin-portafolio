@@ -1,0 +1,156 @@
+---
+import { FiMenu, FiX } from "react-icons/fi";
+import NotificationBell from "./notificationBell.jsx";
+import { FaLinkedinIn, FaGithub } from "react-icons/fa6";
+
+const links = [
+  { name: "Inicio", href: "/" },
+  { name: "Proyectos", href: "/proyectos" },
+  { name: "Sobre Mi", href: "/about" },
+  { name: "Contacto", href: "/contact" },
+];
+---
+
+<nav class="relative">
+  <!-- Input control (peer) -->
+  <input id="menu-toggle" type="checkbox" class="peer hidden md:hidden" />
+
+  <!-- Navbar -->
+  <nav
+    class="fixed top-0 left-0 w-full z-50 bg-gray-950/20 backdrop-blur-md border-b border-white/10"
+  >
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center">
+        <h3
+          class="text-[#69c7c7] text-3xl font-bold drop-shadow-[1.5px_1.5px_0_#7836cf]"
+        >
+          IA
+        </h3>
+      </a>
+
+      <!-- Desktop Links -->
+      <ul id="navbar-links" class="hidden md:flex items-center space-x-8">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="nav-link font-bold transition-colors duration-300 text-white hover:text-[#7d2dac]"
+              >
+                {link.name}
+              </a>
+            </li>
+          ))
+        }
+
+        <li class="flex items-center gap-3">
+          <NotificationBell client:visible />
+
+          <a
+            href="https://www.linkedin.com/in/ivelin-apostolov-a7a48a359/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
+            <FaLinkedinIn
+              className="h-7 w-7 cursor-pointer hover:text-[#7836cf]"
+            />
+          </a>
+
+          <a
+            href="https://github.com/ualia946"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+          >
+            <FaGithub className="h-7 w-7 cursor-pointer hover:text-[#7836cf]" />
+          </a>
+        </li>
+      </ul>
+
+      <!-- Mobile right-side icons -->
+      <div class="flex md:hidden items-center gap-4 z-50">
+        <NotificationBell client:visible />
+        <label for="menu-toggle" class="cursor-pointer">
+          <FiMenu className="h-7 w-7 text-white peer-checked:hidden" />
+          <FiX className="h-7 w-7 text-white hidden peer-checked:block" />
+        </label>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Overlay (mobile only) -->
+  <label
+    for="menu-toggle"
+    class="fixed inset-0 bg-black/60 hidden peer-checked:block cursor-pointer z-40 md:hidden"
+  ></label>
+
+  <!-- Sidebar móvil -->
+  <div
+    class="fixed top-0 right-0 h-full w-64 bg-gray-900 shadow-lg transform translate-x-full transition-transform duration-300 peer-checked:translate-x-0 z-50 md:translate-x-full md:hidden"
+  >
+    <div class="flex justify-end p-4">
+      <label for="menu-toggle" class="cursor-pointer">
+        <FiX className="h-7 w-7 text-white" />
+      </label>
+    </div>
+
+    <ul id="navbar-links-mobile" class="flex flex-col space-y-6 mt-6 ml-6">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="nav-link-mobile text-lg font-bold text-white hover:text-[#69c7c7] transition-colors duration-300"
+            >
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>
+
+<script>
+  (function () {
+    function markActiveLinks() {
+      const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
+      const desktopLinks = Array.from(
+        document.querySelectorAll("#navbar-links .nav-link")
+      );
+      const mobileLinks = Array.from(
+        document.querySelectorAll("#navbar-links-mobile .nav-link-mobile")
+      );
+
+      const allLinks = [...desktopLinks, ...mobileLinks];
+
+      allLinks.forEach((link) => {
+        const hrefAttr = link.getAttribute("href");
+        const href = hrefAttr?.replace(/\/$/, "") || "" || "/";
+
+        if (href === currentPath) {
+          link.classList.add("text-[#7d2dac]", "font-extrabold");
+          link.classList.remove("text-white");
+        } else {
+          link.classList.remove("text-[#7d2dac]", "font-extrabold");
+          if (!link.classList.contains("hover:text-[#7d2dac]")) {
+            link.classList.add("text-white");
+          }
+        }
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", markActiveLinks);
+    } else {
+      markActiveLinks();
+    }
+
+    window.addEventListener("popstate", markActiveLinks);
+    document.addEventListener("astro:page-load", markActiveLinks);
+    document.addEventListener("astro:after-swap", markActiveLinks);
+    window.addEventListener("load", () => setTimeout(markActiveLinks, 50));
+  })();
+</script>

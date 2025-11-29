@@ -1,0 +1,43 @@
+<section class="site-container mt-14 mx-auto max-w-6xl px-4">
+  <div class="site-container mt-14">
+    <h2
+      class="text-4xl font-bold flex flex-col items-center gap-6 text-center whitespace-nowrap text-white md:flex-row md:items-center md:text-start"
+    >
+      <span class="drop-shadow-[2px_2px_0_#7836cf]">Tecnologias</span>
+      <span
+        class="hidden h-1.5 grow rounded-lg drop-shadow-[2px_2px_0_#0debd8] bg-[#7836cf] md:block"
+      ></span>
+    </h2>
+  </div>
+  <div class="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+    {
+      [
+        { name: "Azure", icon: "/svg/azure.svg" },
+        { name: "Kubernetes", icon: "/svg/kubernetes.svg" },
+        { name: "Docker", icon: "/svg/docker.svg" },
+        { name: "Terraform", icon: "/svg/terraform.svg" },
+        { name: "GitHub Actions", icon: "/svg/git.svg" },
+        { name: "Linux", icon: "/svg/linux.svg" },
+        { name: "Bash", icon: "/svg/bash.svg" },
+        { name: "Python", icon: "/svg/python.svg" },
+        { name: "SQL Server", icon: "/svg/sqlserver.svg" },
+        { name: "Power BI", icon: "/svg/powerbi.svg" },
+        { name: "Git", icon: "/svg/git.svg" },
+        { name: "Prometheus", icon: "/svg/prometheus.svg" },
+      ].map((skill) => (
+        <div class="relative group">
+          <div class="absolute inset-0 -z-10 rounded-lg  blur-3xl opacity-0 transition-opacity group-hover:opacity-100" />
+
+          <div class="flex flex-col items-center bg-gray-900 p-4 drop-shadow-[4px_4px_0_#7836cf] rounded-lg shadow-md transition-transform hover:scale-105">
+            <img
+              src={skill.icon}
+              alt={skill.name}
+              class="w-12 h-12"
+            />
+            <p class="mt-2 text-white text-lg font-semibold drop-shadow-[1px_1px_0_#7836cf]">{skill.name}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

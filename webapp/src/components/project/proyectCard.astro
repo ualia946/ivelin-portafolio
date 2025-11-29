@@ -1,0 +1,74 @@
+---
+import { HiArrowRight } from "react-icons/hi";
+
+export interface Props {
+  titulo: string;
+  descripcion: string;
+  imagen: string;
+  tecnologias: string[];
+  demo?: string;
+  codigo: string;
+  categoria?: string;
+  index: number; 
+}
+
+const { titulo, descripcion, imagen, tecnologias, demo, codigo, categoria, index } =
+  Astro.props;
+---
+
+<div
+  data-index={index}
+  data-categoria={categoria ?? ""}
+  class="project-card z-10 flex w-[400px] flex-col overflow-hidden rounded-lg bg-gray-900 shadow-lg transition-transform hover:scale-[1.01] lg:w-[320px] drop-shadow-[4px_4px_0_#7836cf]"
+>
+  <img
+    src={imagen}
+    alt={`Imagen del proyecto ${titulo}`}
+    class="h-50 w-full rounded-2xl object-cover p-3"
+  />
+  <div class="flex grow flex-col px-3 pb-3">
+    <h3 class="text-xl font-semibold text-white drop-shadow-[1px_1px_0_#7836cf]">{titulo}</h3>
+
+    <div class="my-1.5 flex flex-wrap gap-2">
+      {
+        tecnologias.map((tech) => (
+          <span class="rounded-md bg-[#7836cf]/20 text-[#a27ed1] px-2 py-0.5 text-xs font-semibold">
+            {tech}
+          </span>
+        ))
+      }
+    </div>
+
+    <p class="flex grow text-gray-400">{descripcion}</p>
+
+    <div class="mt-auto flex justify-between">
+      {demo && (
+        <a
+          class="group text-primary mt-6 flex items-center justify-start p-0 font-bold text-lg"
+          target="_blank"
+          rel="noopener noreferrer"
+          href={demo}
+        >
+          Demo
+          <HiArrowRight
+            className="ml-1 transition-transform duration-200 group-hover:translate-x-1"
+            size={18}
+          />
+        </a>
+      )}
+
+      <a
+        class="group text-primary mt-6 flex items-center justify-start p-0 font-bold text-lg"
+        href={codigo}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Código
+        <HiArrowRight
+          className="ml-1 transition-transform duration-200 group-hover:translate-x-1"
+          size={18}
+        />
+      </a>
+    </div>
+  </div>
+</div>

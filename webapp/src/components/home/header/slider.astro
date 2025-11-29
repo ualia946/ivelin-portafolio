@@ -1,0 +1,61 @@
+---
+const technologies = [
+  // Cloud
+  "azure",
+  "terraform",
+  "docker",
+  "kubernetes",
+
+  // Data & BI
+  "powerbi",
+  "sqlserver",
+  "mysql",
+
+  // Tools & OS
+  "git",
+  "linux",
+  "bash",
+];
+---
+
+<div class="relative overflow-x-hidden px-8 py-8">
+  <div class="animate-scroll hover:animate-paused flex w-max gap-12 md:gap-20">
+    {
+      technologies.concat(technologies, technologies).map((tech) => (
+        <div class="group flex items-center gap-2 transition-all duration-300">
+          <img
+            src={`/svg/${tech}.svg`}
+            alt={tech}
+            class="h-7 w-auto object-contain  transition-transform group-hover:scale-110"
+            width="30"
+            height="30"
+            loading="lazy"
+          />
+          <span class="text-lg font-medium text-white">
+            {tech.charAt(0).toUpperCase() + tech.slice(1)}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style is:global>
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .animate-scroll {
+    animation: scroll 60s linear infinite;
+  }
+
+  @media (min-width: 768px) {
+    .animate-scroll {
+      animation-duration: 80s;
+    }
+  }
+</style>
