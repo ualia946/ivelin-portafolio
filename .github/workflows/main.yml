@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout del código
-        uses: actions/checkou@v4
+        uses: actions/checkout@v4
         with:
           submodules: true
           
@@ -23,5 +23,5 @@ jobs:
           app_location: "/webapp"
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          OUTPUT_LOCATION: "dist"
+          output_location: "dist"
     
