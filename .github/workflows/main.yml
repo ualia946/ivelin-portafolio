@@ -1,5 +1,6 @@
 name: Despliege Web App Astro
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
