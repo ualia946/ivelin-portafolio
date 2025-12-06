@@ -29,11 +29,11 @@ resource "azurerm_cosmosdb_sql_database" "db_sql" {
 }
 
 resource "azurerm_cosmosdb_sql_container" "container_visitas" {
-  name = "Contador"
+  name = "General"
   resource_group_name = azurerm_resource_group.rg-webapp.name
   account_name = azurerm_cosmosdb_account.db_account.name
   database_name = azurerm_cosmosdb_sql_database.db_sql.name
-  partition_key_paths = ["/id"]
+  partition_key_paths = ["/type"]
 }
 
 resource "random_string" "suffix" {
