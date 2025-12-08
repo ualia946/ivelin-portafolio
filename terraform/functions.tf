@@ -1,7 +1,7 @@
 resource "azurerm_storage_account" "storage" {
   name = "storageivelin${random_string.suffix.result}"
-  location = azurerm_resource_group.rg-webapp.location
-  resource_group_name =  azurerm_static_web_app.web_portfolio.location
+  location = azurerm_static_web_app.web_portfolio.location
+  resource_group_name = azurerm_resource_group.rg-webapp.name
   account_replication_type = "LRS"
   account_tier = "Standard"
   access_tier = "Hot"
