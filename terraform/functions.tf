@@ -1,7 +1,7 @@
 resource "azurerm_storage_account" "storage" {
   name = "storageivelin${random_string.suffix.result}"
   location = azurerm_resource_group.rg-webapp.location
-  resource_group_name = azurerm_resource_group.rg-webapp.name
+  resource_group_name =  azurerm_static_web_app.web_portfolio.location
   account_replication_type = "LRS"
   account_tier = "Standard"
   access_tier = "Hot"
@@ -17,7 +17,7 @@ resource "azurerm_storage_container" "container-functions" {
 resource "azurerm_service_plan" "asp" {
   name = "asp-portfolio"
   resource_group_name = azurerm_resource_group.rg-webapp.name
-  location = "westeurope"
+  location = azurerm_static_web_app.web_portfolio.location
   sku_name = "Y1"
   os_type = "Linux"
 }
@@ -25,7 +25,7 @@ resource "azurerm_service_plan" "asp" {
 resource "azurerm_linux_function_app" "function-app" {
     name = "func-portfolio-${random_string.suffix.result}"
     resource_group_name = azurerm_resource_group.rg-webapp.name
-    location = azurerm_resource_group.rg-webapp.location
+    location = azurerm_static_web_app.web_portfolio.location
 
     storage_account_name = azurerm_storage_account.storage.name
     storage_account_access_key = azurerm_storage_account.storage.primary_access_key
