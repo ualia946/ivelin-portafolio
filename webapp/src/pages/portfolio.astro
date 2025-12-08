@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Proyecto from "../components/project/project.astro"
+import paginaInicioPortafolio from "../assets/img-projects/landing-page.png" // Asegúrate de que esta ruta sea correcta
+import arquitecturaPortafolio from "../assets/img-projects/arquitectura-portafolio.png" // Asegúrate de que esta imagen muestre tu diagrama de flujo o código Terraform
+---
+
+<Layout>
+    <Proyecto
+        titulo="Infraestructura de Portafolio como Código (IaC)"
+        titulo_imagen={arquitecturaPortafolio}
+        descripcion_proyecto="Más allá de una web personal, este proyecto aborda la necesidad de desplegar software de manera fiable y repetible. El desafío principal era eliminar la configuración manual (ClickOps) y los errores humanos en el proceso de publicación, tratando la infraestructura del portafolio con el mismo rigor que un entorno de producción empresarial."
+        objetivos={[
+            "Implementar una estrategia Zero-Touch Deployment (despliegue sin intervención manual).",
+            "Garantizar la inmutabilidad y versionado de la infraestructura mediante código.",
+            "Optimizar los tiempos de entrega de nuevas funcionalidades."
+        ]}
+        solucion_imagen={paginaInicioPortafolio}
+        titulo_solucion="Arquitectura GitOps & CI/CD"
+        descripcion_solucion="Diseñé un flujo de trabajo moderno basado en GitOps. Utilicé Terraform para aprovisionar el repositorio, configurar las ramas protegidas y gestionar los entornos. Implementé un pipeline de CI/CD en GitHub Actions que, ante cada 'push' a la rama main, levanta un contenedor ubuntu-latest, instala dependencias, compila el sitio estático y realiza el despliegue, asegurando que el código en producción siempre coincida con el repositorio."
+        impactos={[
+            "Reduje el tiempo de despliegue en un 95% (de minutos manuales a <40s automáticos) implementando un pipeline de CI/CD con GitHub Actions.",
+            "Eliminé el 100% de la deriva de configuración (configuration drift) gestionando el estado del repositorio y permisos exclusivamente mediante Terraform.",
+            "Aseguré una disponibilidad del 99.9% durante las actualizaciones utilizando despliegues estáticos automatizados que evitan tiempos de inactividad."
+        ]}
+    />
+</Layout>

@@ -1,0 +1,104 @@
+---
+import { Image } from 'astro:assets'
+
+interface Props {
+    titulo: string
+    titulo_imagen: ImageMetadata
+    subtitulo?: string
+    descripcion_proyecto: string
+    objetivos: string[]
+    solucion_imagen: ImageMetadata
+    titulo_solucion: string
+    descripcion_solucion: string
+    impactos: string[]
+    impacto_imagen?: ImageMetadata
+}
+
+const {titulo, titulo_imagen, subtitulo, descripcion_proyecto, objetivos,
+solucion_imagen, titulo_solucion, descripcion_solucion, impactos, impacto_imagen} = Astro.props as Props
+---
+
+<main class="bg-gray-950 text-white min-h-screen py-20">
+    <div class="container mx-auto px-6 lg:px-20 max-w-6xl">
+        <!-- Header Section -->
+        <div class="mb-16">
+            <h1 class="text-5xl text-center lg:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#69c7c7] to-[#7836cf]">
+                {titulo}
+            </h1>
+            {subtitulo && (
+                <p class="text-xl text-gray-300 mb-8">{subtitulo}</p>
+            )}
+        </div>
+
+        <!-- Imagen Principal -->
+        <section class="mb-16">
+            <Image 
+                src={titulo_imagen} 
+                alt="Imagen del proyecto" 
+                class="w-full rounded-xl shadow-2xl drop-shadow-[0_0_30px_rgba(120,54,207,0.3)] mb-8" 
+            />
+            <p class="text-gray-300 text-lg leading-relaxed">{descripcion_proyecto}</p>
+        </section>
+
+        <!-- Objetivos Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-[#69c7c7] drop-shadow-[1.5px_1.5px_0_#7836cf]">
+                Objetivos
+            </h2>
+            <ul class="space-y-4">
+                {objetivos.map((objetivo, index) => (
+                    <li class="flex items-start gap-4 p-4 bg-gray-900/50 rounded-lg border-l-4 border-[#7836cf] hover:bg-gray-900 transition-colors">
+                        <span class="text-[#69c7c7] font-bold text-lg min-w-8">{index + 1}.</span>
+                        <span class="text-gray-300">{objetivo}</span>
+                    </li>
+                ))}
+            </ul>
+        </section>
+
+        <!-- Solución Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-[#69c7c7] drop-shadow-[1.5px_1.5px_0_#7836cf]">
+                Solución
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <Image 
+                    src={solucion_imagen} 
+                    alt="Imagen de la solución" 
+                    class="w-full rounded-xl shadow-2xl drop-shadow-[0_0_30px_rgba(120,54,207,0.3)]" 
+                />
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-4">{titulo_solucion}</h3>
+                    <p class="text-gray-300 text-lg leading-relaxed">{descripcion_solucion}</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impacto Section -->
+        <section class="mb-8">
+            <h2 class="text-3xl font-bold mb-8 text-[#69c7c7] drop-shadow-[1.5px_1.5px_0_#7836cf]">
+                Impacto
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <ul class="space-y-4">
+                        {impactos.map((impacto, index) => (
+                            <li class="flex items-start gap-4 p-4 bg-gray-900/50 rounded-lg border-l-4 border-[#69c7c7] hover:bg-gray-900 transition-colors">
+                                <span class="text-[#7836cf] font-bold text-lg min-w-8">{index + 1}.</span>
+                                <span class="text-gray-300">{impacto}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                {impacto_imagen && (
+                    <Image 
+                        src={impacto_imagen} 
+                        alt="Imagen de impacto" 
+                        class="w-full rounded-xl shadow-2xl drop-shadow-[0_0_30px_rgba(120,54,207,0.3)]" 
+                    />
+                )}
+            </div>
+        </section>
+    </div>
+</main>
+
+

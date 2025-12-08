@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Proyecto from "../components/project/project.astro"
+import k8sArchitecture from "../assets/img-projects/vote-app.png" 
+import vote from "../assets/img-projects/vote.jpg" 
+---
+
+<Layout>
+    <Proyecto
+        titulo="Orquestación de Microservicios a Escala en Azure"
+        titulo_imagen={k8sArchitecture}
+        descripcion_proyecto="El despliegue manual de arquitecturas compuestas por múltiples servicios suele provocar errores humanos y caídas del sistema. Este proyecto aborda ese desafío orquestando una aplicación compleja de cinco componentes interconectados. El objetivo principal fue crear un entorno donde la infraestructura sea inmutable y el despliegue ocurra sin intervención humana, garantizando la estabilidad operativa."
+        objetivos={[
+            "Eliminar por completo los errores manuales en el proceso de publicación.",
+            "Asegurar que los 5 servicios críticos se mantengan operativos ante fallos.",
+            "Detectar problemas de rendimiento antes de que afecten al usuario final."
+        ]}
+        solucion_imagen={vote}
+        titulo_solucion="Automatización y Orquestación en la Nube"
+        descripcion_solucion="Diseñé una arquitectura integral utilizando Terraform para construir el clúster en Azure y gestionar los recursos de red. Creé flujos de trabajo en GitHub Actions que detectan cambios en el código, construyen las imágenes de los contenedores y actualizan la aplicación automáticamente. Además, integré un sistema de vigilancia con Prometheus y Grafana para visualizar el estado de cada componente en tiempo real."
+        impactos={[
+            "Aceleré la entrega de software pasando de horas a minutos mediante la creación de un sistema de despliegue totalmente automatizado con GitHub Actions.",
+            "Garanticé la disponibilidad continua de las 5 aplicaciones principales implementando mecanismos de recuperación automática dentro de Kubernetes.",
+            "Minimicé la superficie de ataque del sistema estableciendo un modelo de seguridad que restringe estrictamente las comunicaciones entre servicios."
+        ]}
+    />
+</Layout>

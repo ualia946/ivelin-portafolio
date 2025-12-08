@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Proyecto from "../components/project/project.astro"
+import azureTopology from "../assets/img-projects/topologia-azure.png"
+// Sugerencia de imágenes: Captura del "Terraform Apply" exitoso en GitHub Actions o Azure Portal
+import terraformPipeline from "../assets/img-projects/terraform-pipeline.png"
+---
+
+<Layout>
+    <Proyecto
+        titulo="Infraestructura Segura y Automatizada en Azure (DevSecOps)"
+        titulo_imagen={azureTopology}
+        descripcion_proyecto="La gestión manual de la infraestructura en la nube suele derivar en configuraciones inseguras y falta de control sobre los recursos (Shadow IT). Este proyecto nació con la meta de establecer un estándar de ingeniería donde la seguridad no sea un añadido, sino parte del código base. El desafío principal fue orquestar un entorno complejo en Azure eliminando por completo el uso de credenciales estáticas y garantizando la inmutabilidad de la red."
+        objetivos={[
+            "Implementar una estrategia de Infraestructura como Código (IaC) para más de 15 recursos.",
+            "Erradicar el uso de contraseñas y secretos en el código fuente (Zero Secrets).",
+            "Establecer un flujo de trabajo colaborativo y auditable basado en GitOps."
+        ]}
+        solucion_imagen={terraformPipeline}
+        titulo_solucion="Arquitectura Zero Trust & GitOps"
+        descripcion_solucion="Desarrollé una solución modular utilizando Terraform para aprovisionar redes virtuales, subredes y recursos de computación bajo un modelo de 'defensa en profundidad'. Sustituí las claves de acceso tradicionales por Identidades Administradas (Managed Identities) de Azure, asegurando que los servicios se autentiquen de forma automática y segura. Todo el ciclo de vida se gestiona mediante un pipeline de GitHub Actions que valida, planifica y aplica los cambios de infraestructura automáticamente tras cada revisión de código."
+        impactos={[
+            "Automaticé el aprovisionamiento de más de 15 componentes de infraestructura críticos, reduciendo el tiempo de configuración de días a minutos mediante Terraform.",
+            "Eliminé el 100% de la gestión manual de credenciales y el riesgo de fugas de secretos implementando Identidades Administradas (Managed Identities) entre servicios.",
+            "Aumenté la fiabilidad y trazabilidad de los cambios en el entorno productivo adoptando una metodología GitOps que asegura un historial de versiones inmutable."
+        ]}
+    />
+</Layout>

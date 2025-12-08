@@ -1,0 +1,45 @@
+---
+
+---
+
+<div class="text-gray-400">
+    <p class="text-sm font-semibold tracking-wide">
+        Visitas: <span id="number-visits" class="text-[#69c7c7] font-bold">...</span>
+    </p>
+</div>
+
+<script>
+    const visits = document.getElementById("number-visits")
+    const sessionKey = "visitas_usuario"
+    const savedVisit = sessionStorage.getItem(sessionKey)
+
+    if(!visits) throw new Error("Elemento no encontrado")
+
+    if(savedVisit){
+        visits.innerHTML = savedVisit
+    }else{
+        try {
+            const response = await fetch('http://localhost:7071/api/actualizarVisitas')
+            const data = await response.json()
+
+            const targetCount = data.count
+            sessionStorage.setItem(sessionKey, targetCount)
+
+            let currentCount = 0
+            const increment = Math.ceil(targetCount / 20)
+            
+            const interval = setInterval(() => {
+                currentCount += increment
+                if (currentCount >= targetCount) {
+                    visits.innerHTML = String(targetCount)
+                    clearInterval(interval)
+                } else {
+                    visits.innerHTML = String(currentCount)
+                }
+            }, 30)
+        } catch (error) {
+            console.log(error)
+            visits.innerHTML = "Error"
+        }
+    }
+</script>
