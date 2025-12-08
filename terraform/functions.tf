@@ -16,7 +16,7 @@ resource "azurerm_storage_container" "container-functions" {
 
 resource "azurerm_service_plan" "asp" {
   name = "asp-portfolio"
-  resource_group_name = azurerm_resource_group.rg-webapp.name
+  resource_group_name = "westeurope"
   location = azurerm_resource_group.rg-webapp.location
   sku_name = "Y1"
   os_type = "Linux"
