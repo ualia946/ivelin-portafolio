@@ -37,7 +37,7 @@ resource "azurerm_linux_function_app" "function-app" {
       }
 
       cors {
-        allowed_origins = ["https://${azurerm_static_web_app.web_portfolio.default_host_name}", "https:www.ivelinapostolov.com"]
+        allowed_origins = ["https://${azurerm_static_web_app.web_portfolio.default_host_name}", "https//:www.ivelinapostolov.com"]
       }
     }
 
