@@ -1,0 +1,40 @@
+name: Despliegue API Backend (Azure Functions)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+    paths: ["api/**"]
+env:
+  AZURE_FUNCTIONAPP_NAME:  func-portfolio-fyio6s
+  AZURE_FUNCTIONAPP_PROJECT_PATH: api
+  
+jobs:
+  build-and-deploy:
+    name: Construcción y despliegue de API en Azure Functions.
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+
+      - name: Instalar dependencias y construir
+        shell: bash
+        run: |
+          cd ./${{ env.AZURE_FUNCTIONAPP_PROJECT_PATH }}
+          npm install
+          npm run build --if-present
+          npm prune --production
+
+      - name: Desplegar a Azure Functions
+        uses: Azure/functions-action@v1
+        with:
+          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+          package: '${{ env.AZURE_FUNCTIONAPP_PROJECT_PATH }}'
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+        
