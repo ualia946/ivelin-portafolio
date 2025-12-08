@@ -37,7 +37,7 @@ resource "azurerm_linux_function_app" "function-app" {
       }
 
       cors {
-        allowed_origins = [azurerm_static_web_app.web_portfolio.default_host_name]
+        allowed_origins = ["https://${azurerm_static_web_app.web_portfolio.default_host_name}"]
       }
     }
 
