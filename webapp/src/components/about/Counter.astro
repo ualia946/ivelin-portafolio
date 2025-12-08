@@ -12,6 +12,7 @@
     const visits = document.getElementById("number-visits")
     const sessionKey = "visitas_usuario"
     const savedVisit = sessionStorage.getItem(sessionKey)
+    const apiUrl = import.meta.env.PUBLIC_API_URL
 
     if(!visits) throw new Error("Elemento no encontrado")
 
@@ -19,7 +20,7 @@
         visits.innerHTML = savedVisit
     }else{
         try {
-            const response = await fetch('http://localhost:7071/api/actualizarVisitas')
+            const response = await fetch(apiUrl)
             const data = await response.json()
 
             const targetCount = data.count
