@@ -9,3 +9,15 @@ variable "cosmos_db_endpoint" {
    type = string
    sensitive = true
  }
+
+ variable "mongo_username" {
+   description = "Nombre de usuario para el clúster de MongoDB"
+   type = string
+   sensitive = false
+ }
+
+ variable "mongo_password" {
+   description = "Contraseña de usuario para el clúster de MongoDB"
+   type = string
+   sensitive = true
+ }
