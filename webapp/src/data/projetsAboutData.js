@@ -15,6 +15,7 @@ export const proyectos = [
     titulo: "Laboratorio web de pentesting",
     imagen: dvwa.src,
     tecnologias: ["Azure", "Docker", "Terraform", "MySQL", "Application Gateway"],
+    demo: "/devsecops-azure-lab",
     codigo: "https://github.com/ualia946/iac-devsecops-azure-lab/tree/main",
   },
   {

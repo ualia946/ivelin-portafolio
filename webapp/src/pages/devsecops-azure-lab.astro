@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Proyecto from "../components/project/project.astro"
+import azureTopology from "../assets/img-projects/topologia-azure.png"
+import terraformPlan from "../assets/img-projects/terraform-plan.png" 
+---
+
+<Layout>
+    <Proyecto
+        titulo="Infraestructura Segura y Automatizada en Azure (DevSecOps)"
+        titulo_imagen={terraformPlan}
+        descripcion_proyecto="Como ingeniero, mi prioridad no es solo 'que funcione', sino que sea seguro y escalable. Diseñé este proyecto para demostrar cómo elimino el riesgo humano en la gestión de la nube. Asumí la responsabilidad de transformar un proceso manual y peligroso en una cadena de montaje de software segura, donde cada cambio en la infraestructura está auditado, probado y desplegado automáticamente por el código que yo mismo escribí."
+        objetivos={[
+            "La configuración manual de servidores provocaba errores humanos recurrentes y tiempos de espera de días.",
+            "Existía un riesgo crítico de seguridad al tener contraseñas escritas en archivos de configuración (Hardcoded Secrets).",
+            "No había forma de saber quién modificó la infraestructura ni de volver atrás en caso de fallo (Falta de trazabilidad)."
+        ]}
+        solucion_imagen={azureTopology}
+        titulo_solucion="Mi Solución: Arquitectura Zero Trust & GitOps"
+        descripcion_solucion="Para resolver estos problemas, construí una solución basada en Infraestructura como Código (IaC). Utilicé Terraform para definir la 'arquitectura ideal' y GitHub Actions para aplicarla sin intervención humana. Mi decisión técnica clave fue implementar un modelo de seguridad 'Zero Trust': eliminé las contraseñas y las sustituí por Identidades Administradas de Azure, logrando que los servidores se reconozcan entre sí de forma automática y blindada."
+        impactos={[
+            "Reduje el tiempo de entrega de infraestructura de días a minutos (<10 min), permitiendo al equipo empezar a trabajar casi al instante.",
+            "Eliminé radicalmente (100%) el riesgo de fuga de credenciales al implementar mi arquitectura de Identidades sin contraseñas.",
+            "Garanticé la estabilidad del entorno productivo mediante GitOps, asegurando que cualquier error se pueda revertir en segundos gracias al historial de versiones."
+        ]}
+    />
+</Layout>
