@@ -7,6 +7,7 @@ resource "azurerm_mongo_cluster" "cluster" {
   administrator_password = var.mongo_password
 
   compute_tier = "Free"
+  shard_count = 1
   high_availability_mode = "Disabled"
   storage_size_in_gb = "32"
   version = "8.0"
