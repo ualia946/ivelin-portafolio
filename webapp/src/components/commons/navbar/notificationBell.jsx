@@ -8,12 +8,11 @@ export default function NotificationBell() {
 
   // Notificaciones
   const baseNotifications = [
-    { id: 1, text: "Nuevo proyecto publicado 🚀", read: false },
     {
-      id: 2,
-      text: "Hey como va?, te comento que actualmente estoy aprendiendo desarrollo móvil ✨",
+      id: 1,
+      text: "Hey como va?, te comento que actualmente estoy implementando un chat bot que responderá cualquier duda que tengas sobre mí 🤖",
       read: false,
-    },
+    }
   ];
 
   // Obtener el id
