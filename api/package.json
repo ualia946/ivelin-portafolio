@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@azure/cosmos": "^4.9.0",
-    "@azure/functions": "^4.0.0"
+    "@azure/functions": "^4.0.0",
+    "@google/genai": "^1.33.0",
+    "mongo": "^0.1.0"
   },
   "devDependencies": {
     "azure-functions-core-tools": "^4.x"
