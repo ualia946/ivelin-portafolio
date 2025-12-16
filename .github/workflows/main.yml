@@ -28,4 +28,4 @@ jobs:
 
         env:
           PUBLIC_API_URL: https://func-portfolio-fyio6s.azurewebsites.net/api/actualizarVisitas
-    
+          PUBLIC_API_CHATBOT_URL: https://func-portfolio-fyio6s.azurewebsites.net/api/obtenerRespuestaChatBot
