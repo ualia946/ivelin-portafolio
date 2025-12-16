@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Navbar from "../components/commons/navbar/navbar.astro";
 import Footer from "../components/commons/footer/footer.astro";
+import { ChatBot } from "../components/commons/chatBot/ChatBot.jsx"
 ---
 
 <!doctype html>
@@ -16,6 +17,7 @@ import Footer from "../components/commons/footer/footer.astro";
   <body class="bg-gray-950 text-white">
     <Navbar />
     <slot />
+    <ChatBot client:load/>
     <Footer />
   </body>
 </html>
