@@ -56,6 +56,8 @@ resource "azurerm_linux_function_app" "function-app" {
 
 data "azurerm_role_definition" "cost-reader" {
   name = "Cost Management Reader"
+
+  depends_on = [ azurerm_linux_function_app.function-app ]
 }
 
 resource "azurerm_role_assignment" "function-role-assignment" {
@@ -63,4 +65,5 @@ resource "azurerm_role_assignment" "function-role-assignment" {
   role_definition_id = data.azurerm_role_definition.cost-reader.id
   principal_id = azurerm_linux_function_app.function-app.identity[0].principal_id
   principal_type = "ServicePrincipal"
+  depends_on = [ azurerm_linux_function_app.function-app ]
 }
