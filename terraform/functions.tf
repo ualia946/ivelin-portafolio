@@ -47,5 +47,20 @@ resource "azurerm_linux_function_app" "function-app" {
       "FUNCTIONS_WORKER_RUNTIME" = "node"
       "WEBSITE_RUN_FROM_PACKAGE" = 1
     }
+
+    identity {
+      type = "SystemAssigned"
+    }
     
+}
+
+data "azurerm_role_definition" "cost-reader" {
+  name = "Cost Management Reader"
+  scope = azurerm_resource_group.rg-webapp.id
+}
+
+resource "azurerm_role_assignment" "function-role-assignment" {
+  scope = azurerm_resource_group.rg-webapp.id
+  role_definition_id = azurerm_role_definition.cost-reader.id
+  principal_id = azurerm_linux_function_app.function-app.identity[0].principal_id
 }
