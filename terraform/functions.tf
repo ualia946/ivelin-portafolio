@@ -61,7 +61,6 @@ data "azurerm_role_definition" "cost-reader" {
 resource "azurerm_role_assignment" "function-role-assignment" {
   scope = azurerm_resource_group.rg-webapp.id
   role_definition_id = data.azurerm_role_definition.cost-reader.id
-  principal_id = azurerm_linux_function_app.function-app.identity.principal_id
-
-  depends_on = [ azurerm_linux_function_app.function-app ]
+  principal_id = azurerm_linux_function_app.function-app.identity[0].principal_id
+  principal_type = "ServicePrincipal"
 }
