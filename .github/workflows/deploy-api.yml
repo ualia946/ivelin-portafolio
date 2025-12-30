@@ -28,7 +28,6 @@ jobs:
         run: |
           cd ./${{ env.AZURE_FUNCTIONAPP_PROJECT_PATH }}
           npm install
-          npm run build 
           npm prune --production
 
       - name: Desplegar a Azure Functions
