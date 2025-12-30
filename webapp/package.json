@@ -13,11 +13,14 @@
     "@tailwindcss/vite": "^4.1.16",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
+    "@xyflow/react": "^12.10.0",
     "astro": "^5.15.3",
+    "dagre": "^0.8.5",
     "lucide-react": "^0.561.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
+    "react-spinners": "^0.17.0",
     "tailwindcss": "^4.1.16",
     "typewriter-effect": "^2.21.0"
   }

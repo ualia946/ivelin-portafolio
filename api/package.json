@@ -8,8 +8,10 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
+    "@azure/arm-resourcegraph": "^4.2.1",
     "@azure/cosmos": "^4.9.0",
     "@azure/functions": "^4.0.0",
+    "@azure/identity": "^4.13.0",
     "@google/genai": "^1.33.0",
     "mongo": "^0.1.0"
   },
