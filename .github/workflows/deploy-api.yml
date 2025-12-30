@@ -29,8 +29,6 @@ jobs:
           cd ./${{ env.AZURE_FUNCTIONAPP_PROJECT_PATH }}
           npm install
           npm prune --production
-          echo "Contenido de API antes de empaquetar:" && ls -la && echo && echo "Recursivo:" && ls -laR
-          zip -r functionapp.zip . -x "node_modules/**/.cache/**"
 
       - name: Desplegar a Azure Functions
         uses: Azure/functions-action@v1
