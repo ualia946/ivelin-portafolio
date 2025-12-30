@@ -30,6 +30,7 @@ jobs:
           npm install
           npm run build --if-present
           npm prune --production
+          ls -F
 
       - name: Desplegar a Azure Functions
         uses: Azure/functions-action@v1
