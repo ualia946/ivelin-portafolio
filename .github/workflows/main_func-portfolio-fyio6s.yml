@@ -39,9 +39,7 @@ jobs:
 
       - name: Zip artifact for deployment
         run: |
-          cd api
-          zip -r ../release.zip .
-          cd ..
+          zip -r ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/release.zip .
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -58,6 +56,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
+      
+      - name: Unzip artifact
+        run: |
+          unzip release.zip
+          rm release.zip
 
       - name: Run Azure Functions Action
         uses: Azure/functions-action@v1
@@ -65,6 +68,6 @@ jobs:
         with:
           app-name: 'func-portfolio-fyio6s'
           slot-name: 'Production'
-          package: './release.zip'
+          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
           sku: 'flexconsumption'
