@@ -22,46 +22,36 @@ resource "azurerm_service_plan" "asp" {
   os_type = "Linux"
 }
 
-resource "azurerm_linux_function_app_flex_consumption" "function-app" {
-  name                = "func-portfolio-${random_string.suffix.result}"
-  resource_group_name = azurerm_resource_group.rg-webapp.name
-  location            = azurerm_static_web_app.web_portfolio.location
+resource "azurerm_linux_function_app" "function-app" {
+    name = "func-portfolio-${random_string.suffix.result}"
+    resource_group_name = azurerm_resource_group.rg-webapp.name
+    location = azurerm_static_web_app.web_portfolio.location
 
-  storage_account_name       = azurerm_storage_account.storage.name
-  storage_account_access_key = azurerm_storage_account.storage.primary_access_key
-  service_plan_id            = azurerm_service_plan.asp.id
+    storage_account_name = azurerm_storage_account.storage.name
+    storage_account_access_key = azurerm_storage_account.storage.primary_access_key
+    service_plan_id = azurerm_service_plan.asp.id
 
-  function_app_config {
-    deployment {
-      storage {
-        type         = "blobContainer"
-        container_id = azurerm_storage_container.container-functions.resource_manager_id
+    site_config {
+      application_stack {
+        node_version = "20"
+      }
+
+      cors {
+        allowed_origins = ["https://${azurerm_static_web_app.web_portfolio.default_host_name}", "https://www.ivelinapostolov.com"]
       }
     }
-  }
 
-  runtime {
-    name    = "node"
-    version = "20"
-  }
-
-  site_config {
-    cors {
-      allowed_origins = [
-        "https://${azurerm_static_web_app.web_portfolio.default_host_name}", 
-        "https://www.ivelinapostolov.com"
-      ]
+    app_settings = {
+      "COSMOS_DB_ENDPOINT" = var.cosmos_db_endpoint
+      "COSMOS_DB_KEY" = var.cosmos_db_key
+      "FUNCTIONS_WORKER_RUNTIME" = "node"
+      "WEBSITE_RUN_FROM_PACKAGE" = 1
     }
-  }
 
-  app_settings = {
-    "COSMOS_DB_ENDPOINT" = var.cosmos_db_endpoint
-    "COSMOS_DB_KEY"      = var.cosmos_db_key
-  }
-
-  identity {
-    type = "SystemAssigned"
-  }
+    identity {
+      type = "SystemAssigned"
+    }
+    
 }
 
 resource "azurerm_role_assignment" "storage_access" {
