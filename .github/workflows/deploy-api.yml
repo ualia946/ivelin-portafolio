@@ -26,10 +26,12 @@ jobs:
       - name: Instalar dependencias y construir
         shell: bash
         run: |
-          cd ./${{ env.AZURE_FUNCTIONAPP_PROJECT_PATH }}
+          pushd "./${{ env.AZURE_FUNCTIONAPP_PROJECT_PATH }}"
           npm install
-          npm prune --production
-
+          npm run build --if-present
+          npm run test --if-present
+          popd
+      
       - name: Desplegar a Azure Functions
         uses: Azure/functions-action@v1
         with:
