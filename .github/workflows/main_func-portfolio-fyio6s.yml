@@ -38,10 +38,8 @@ jobs:
       - name: Zip artifact for deployment
         # IMPORTANTE: Entramos en api para que host.json quede en la raíz del zip
         run: |
-          cd api
-          zip -r ../release.zip .
-          cd ..
-
+          zip -r release.zip ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+  
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
