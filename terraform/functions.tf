@@ -22,20 +22,22 @@ resource "azurerm_service_plan" "asp" {
   os_type = "Linux"
 }
 
-resource "azurerm_linux_function_app" "function-app" {
+resource "azurerm_function_app_flex_consumption" "function-app" {
     name = "func-portfolio-${random_string.suffix.result}"
     resource_group_name = azurerm_resource_group.rg-webapp.name
     location = azurerm_static_web_app.web_portfolio.location
-
-    storage_account_name = azurerm_storage_account.storage.name
-    storage_account_access_key = azurerm_storage_account.storage.primary_access_key
     service_plan_id = azurerm_service_plan.asp.id
 
-    site_config {
-      application_stack {
-        node_version = "20"
-      }
+    storage_container_type = "blobContainer"
+    storage_container_endpoint = "${azurerm_storage_account.storage.primary_blob_endpoint}${azurerm_storage_container.container-functions.name}"
+    storage_authentication_type = "StorageAccountConnectionString"
+    storage_access_key = azurerm_storage_account.storage.primary_access_key
+    runtime_name = "node"
+    runtime_version = "20"
+    maximum_instance_count = 50
+    instance_memory_in_mb = 2048
 
+    site_config {
       cors {
         allowed_origins = ["https://${azurerm_static_web_app.web_portfolio.default_host_name}", "https://www.ivelinapostolov.com"]
       }
@@ -54,9 +56,4 @@ resource "azurerm_linux_function_app" "function-app" {
     
 }
 
-resource "azurerm_role_assignment" "storage_access" {
-  scope                = azurerm_storage_account.storage.id
-  role_definition_name = "Storage Blob Data Owner"
-  principal_id         = azurerm_linux_function_app.function-app.identity[0].principal_id
-  depends_on = [ azurerm_linux_function_app.function-app ]
-}
+
