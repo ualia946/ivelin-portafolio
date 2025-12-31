@@ -64,10 +64,8 @@ resource "azurerm_linux_function_app_flex_consumption" "function-app" {
   }
 }
 
-
-resource "azurerm_role_assignment" "function-role-assignment" {
-  scope                = azurerm_resource_group.rg-webapp.id
-  role_definition_name = "Contributor"
+resource "azurerm_role_assignment" "storage_access" {
+  scope                = azurerm_storage_account.storage.id
+  role_definition_name = "Storage Blob Data Owner"
   principal_id         = azurerm_linux_function_app_flex_consumption.function-app.identity[0].principal_id
-  principal_type       = "ServicePrincipal"
 }
