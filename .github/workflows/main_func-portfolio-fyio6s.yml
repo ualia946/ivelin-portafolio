@@ -34,7 +34,6 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-          npm prune --production
           popd
 
       - name: Zip artifact for deployment
@@ -56,11 +55,6 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
-      
-      - name: Unzip artifact
-        run: |
-          unzip release.zip
-          rm release.zip
 
       - name: Run Azure Functions Action
         uses: Azure/functions-action@v1
@@ -68,6 +62,6 @@ jobs:
         with:
           app-name: 'func-portfolio-fyio6s'
           slot-name: 'Production'
-          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+          package: './release.zip'
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
           sku: 'flexconsumption'
