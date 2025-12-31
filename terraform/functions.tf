@@ -18,7 +18,7 @@ resource "azurerm_service_plan" "asp" {
   name = "asp-portfolio"
   resource_group_name = azurerm_resource_group.rg-webapp.name
   location = azurerm_static_web_app.web_portfolio.location
-  sku_name = "Y1"
+  sku_name = "FC1"
   os_type = "Linux"
 }
 
