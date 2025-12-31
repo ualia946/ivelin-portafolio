@@ -40,7 +40,7 @@ resource "azurerm_linux_function_app" "function-app" {
         allowed_origins = ["https://${azurerm_static_web_app.web_portfolio.default_host_name}", "https://www.ivelinapostolov.com"]
       }
     }
-s
+
     app_settings = {
       "COSMOS_DB_ENDPOINT" = var.cosmos_db_endpoint
       "COSMOS_DB_KEY" = var.cosmos_db_key
