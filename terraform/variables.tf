@@ -21,3 +21,9 @@ variable "cosmos_db_endpoint" {
    type = string
    sensitive = true
  }
+
+ variable "gemini_api" {
+   description = "Api de Gemini"
+   type = string
+   sensitive = true
+ }

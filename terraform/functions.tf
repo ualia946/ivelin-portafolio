@@ -46,6 +46,8 @@ resource "azurerm_function_app_flex_consumption" "function-app" {
     app_settings = {
       "COSMOS_DB_ENDPOINT" = var.cosmos_db_endpoint
       "COSMOS_DB_KEY" = var.cosmos_db_key
+      "GEMINI_API" = var.gemini_api
+      "MONGODB_URI" = var.mongo_password
     }
 
     identity {
