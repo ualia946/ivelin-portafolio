@@ -39,7 +39,7 @@ jobs:
 
       - name: Zip artifact for deployment
         run: |
-          zip -r ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/release.zip .
+          zip -r releaze.zip ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
