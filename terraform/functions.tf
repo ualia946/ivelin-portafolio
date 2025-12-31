@@ -40,7 +40,7 @@ resource "azurerm_linux_function_app" "function-app" {
         allowed_origins = ["https://${azurerm_static_web_app.web_portfolio.default_host_name}", "https://www.ivelinapostolov.com"]
       }
     }
-
+s
     app_settings = {
       "COSMOS_DB_ENDPOINT" = var.cosmos_db_endpoint
       "COSMOS_DB_KEY" = var.cosmos_db_key
@@ -57,6 +57,6 @@ resource "azurerm_linux_function_app" "function-app" {
 resource "azurerm_role_assignment" "storage_access" {
   scope                = azurerm_storage_account.storage.id
   role_definition_name = "Storage Blob Data Owner"
-  principal_id         = azurerm_linux_function_app_flex_consumption.function-app.identity[0].principal_id
+  principal_id         = azurerm_linux_function_app.function-app.identity[0].principal_id
   depends_on = [ azurerm_linux_function_app.function-app ]
 }
