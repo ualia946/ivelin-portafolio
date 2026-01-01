@@ -23,7 +23,7 @@ resource "azurerm_service_plan" "asp" {
 }
 
 resource "azurerm_function_app_flex_consumption" "function-app" {
-    name = "func-portfolio-${random_string.suffix.result}"
+    name = "func-portfolio-api-${random_string.suffix.result}"
     resource_group_name = azurerm_resource_group.rg-webapp.name
     location = azurerm_static_web_app.web_portfolio.location
     service_plan_id = azurerm_service_plan.asp.id
@@ -44,6 +44,7 @@ resource "azurerm_function_app_flex_consumption" "function-app" {
     }
 
     app_settings = {
+      "AzureWebJobsStorage" = azurerm_storage_account.storage.primary_connection_string
       "COSMOS_DB_ENDPOINT" = var.cosmos_db_endpoint
       "COSMOS_DB_KEY" = var.cosmos_db_key
       "GEMINI_API" = var.gemini_api
