@@ -27,5 +27,6 @@ jobs:
           output_location: "dist"
 
         env:
-          PUBLIC_API_URL: https://func-portfolio-fyio6s.azurewebsites.net/api/actualizarVisitas
-          PUBLIC_API_CHATBOT_URL: https://func-portfolio-fyio6s.azurewebsites.net/api/obtenerRespuestaChatBot
+          PUBLIC_API_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/actualizarvisitas
+          PUBLIC_API_CHATBOT_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/obtenerRespuestaChatBot
+          PUBLIC_API_INFRAESTRUCTURE_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/obtenerInfraestructura
