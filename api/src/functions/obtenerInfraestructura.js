@@ -28,7 +28,10 @@ const RESOURCE_MAP = {
     "microsoft.network/virtualnetworks": "Virtual Network",
     "microsoft.network/networkinterfaces": "Network Interface",
     "microsoft.network/publicipaddresses": "Public IP Address",
-    "microsoft.network/networksecuritygroups": "Network Security Group"
+    "microsoft.network/networksecuritygroups": "Network Security Group",
+
+    //Identities
+    "microsoft.managedidentity/userassignedidentities": "User Assigned Identities"
 };
 
 
@@ -100,7 +103,7 @@ function addEdges(edges, nodes, rawResource){
 
     const functionAppNode = nodes.find(n => n.data.type.includes("App Service / Function"))
     if(functionAppNode){
-        const functionResource = rawResource.find(r => r.name === functionAppNode.id)
+        /*const functionResource = rawResource.find(r => r.name === functionAppNode.id)
         console.log(functionResource.properties.serverFarmId)
         if(functionResource && functionResource.properties.serverFarmId){
             const targetResourceName = functionResource.properties.serverFarmId.split("/").pop()
@@ -115,7 +118,7 @@ function addEdges(edges, nodes, rawResource){
                     style: { stroke: "#7836cf" }
                 })
             }
-        }
+        }*/
 
         const dbNodes = nodes.filter(n => n.data.type.includes("DB"))
         for(const dbNode of dbNodes){

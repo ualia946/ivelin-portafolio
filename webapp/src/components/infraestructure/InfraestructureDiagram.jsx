@@ -22,7 +22,8 @@ const RESOURCE_IMAGES = {
     "Virtual Network": "/icons/azure-icons/10061-icon-service-Virtual-Networks.svg",
     "Network Interface": "/icons/azure-icons/10080-icon-service-Network-Interfaces.svg",
     "Public IP Address": "/icons/azure-icons/10069-icon-service-Public-IP-Addresses.svg",
-    "Network Security Group": "/icons/azure-icons/10067-icon-service-Network-Security-Groups.svg"
+    "Network Security Group": "/icons/azure-icons/10067-icon-service-Network-Security-Groups.svg",
+    "User Assigned Identities": "/icons/azure-icons/10227-icon-service-Managed-Identities.svg"
 }
 
 const dagreGraph = new dagre.graphlib.Graph();
