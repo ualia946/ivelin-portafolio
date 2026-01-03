@@ -77,7 +77,7 @@ function changeType(resource){
 
 function addNode(nodes, resource){
     nodes.push({
-        id: resource.name,
+        id: `${resource.name}\\${resource.type}`,
         position: {x:0, y:0},
         data: {
             name: resource.name,
