@@ -29,7 +29,7 @@ const RESOURCE_IMAGES = {
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-const nodeWidth = 200;
+const nodeWidth = 250;
 const nodeHeight = 130;
 
 const getLayoutedElements = (nodes, edges, direction = 'TB') => {

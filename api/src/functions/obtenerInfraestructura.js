@@ -120,6 +120,16 @@ function addEdges(edges, nodes, rawResource){
             }
         }*/
 
+        const staticWebApp = nodes.find(n => n.data.type.includes("Static Web App"))
+        edges.push({
+            id: `${functionAppNode.id}_to_${staticWebApp.id}`,
+            source: staticWebApp.id,
+            target: functionAppNode.id,
+            animated: true,
+            label: "Solicitud API",
+            style: { stroke: "#4300FF" }
+        })
+
         const dbNodes = nodes.filter(n => n.data.type.includes("DB"))
         for(const dbNode of dbNodes){
             edges.push({
