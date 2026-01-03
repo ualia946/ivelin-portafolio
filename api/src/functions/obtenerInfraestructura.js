@@ -159,9 +159,9 @@ app.http('obtenerInfraestructura', {
                 | project name, type, location, properties
                 | order by name asc 
             `
-            const result = await client.resources({
-                query: query
-            })
+            const subscriptionId = process.env.AZURE_SUBSCRIPTION_ID
+            const request = subscriptionId ? { subscriptions: [subscriptionId], query } : { query }
+            const result = await client.resources(request)
 
             const nodes = []
             const edges = []
@@ -171,11 +171,21 @@ app.http('obtenerInfraestructura', {
             console.log(edges)
 
             return{
-                body: JSON.stringify({nodes: nodes, edges: edges})
+                body: JSON.stringify({nodes: nodes, edges: edges}),
+                headers: { 'Content-Type': 'application/json' }
             }
 
         }catch (error){
             console.error(error)
+            return {
+                status: 500,
+                body: JSON.stringify({
+                    message: 'Error obteniendo la infraestructura.',
+                    hint: 'Verifica que la identidad administrada tenga rol Reader en el RG o suscripción y que AZURE_SUBSCRIPTION_ID esté configurado.',
+                    details: error?.message || 'unknown'
+                }),
+                headers: { 'Content-Type': 'application/json' }
+            }
         }
     }
 });

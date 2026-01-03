@@ -2,17 +2,7 @@ const { app } = require('@azure/functions');
 const { MongoClient } = require('mongodb')
 const { GoogleGenAI } = require('@google/genai')
 
-
-const GEMINI_API = process.env.GEMINI_API
-const MONGODB_URI = process.env.MONGODB_URI
-
-if(!GEMINI_API || !MONGODB_URI) throw new Error("Faltan variables de entorno (GEMINI_API o MONGODB_API)")
-
-const genaiClient = new GoogleGenAI({apiKey: GEMINI_API})
-const mongoClient = new MongoClient(MONGODB_URI)
-
-
-async function transformQuestionIntoVector(question) {
+async function transformQuestionIntoVector(question, genaiClient) {
     try{
         const response = await genaiClient.models.embedContent({
             model: 'text-embedding-004',
@@ -28,7 +18,7 @@ async function transformQuestionIntoVector(question) {
     }
 }
 
-async function getSimilarMeaningCV(questionVector){
+async function getSimilarMeaningCV(questionVector, mongoClient){
     try {
         await mongoClient.connect()
         const database = mongoClient.db("portfolio")
@@ -63,7 +53,7 @@ async function getSimilarMeaningCV(questionVector){
     }
 }
 
-async function getResponse(question, queryResult){
+async function getResponse(question, queryResult, genaiClient){
     const contextString = JSON.stringify(queryResult);
     const prompt = `
         Actúa como Ivelin Apostolov (el dueño de este CV). Tu tarea es responder preguntas profesionales sobre tu experiencia basándote EXCLUSIVAMENTE en el contexto proporcionado abajo.
@@ -100,17 +90,31 @@ app.http('obtenerRespuestaChatBot', {
     authLevel: 'anonymous',
     handler: async (request, context) => {
         try {
+            const GEMINI_API = process.env.GEMINI_API
+            const MONGODB_URI = process.env.MONGODB_URI
+
+            if(!GEMINI_API || !MONGODB_URI){
+                return {
+                    body: JSON.stringify({
+                        message: 'Error obteniendo las claves API de Gemini o MongoDB.',
+                        hint: 'Verificar las claves API'
+                    }),
+                    headers: {'Content-Type': 'application/json'}
+                }
+            }
+            const genaiClient = new GoogleGenAI({apiKey: GEMINI_API})
+            const mongoClient = new MongoClient(MONGODB_URI)
+
             const body = await request.json()
             const question = body.question 
-
 
             if(!question){
                 return { status: 400, body: "Por favor envíe una pregunta" }
             }
   
-            const questionVector = await transformQuestionIntoVector(question)
-            const queryResult = await getSimilarMeaningCV(questionVector)
-            const response = await getResponse(question, queryResult)
+            const questionVector = await transformQuestionIntoVector(question, genaiClient)
+            const queryResult = await getSimilarMeaningCV(questionVector, mongoClient)
+            const response = await getResponse(question, queryResult, genaiClient)
 
             return {
                 body: JSON.stringify({reply: response}),
@@ -119,10 +123,6 @@ app.http('obtenerRespuestaChatBot', {
         
         } catch (error) {
            console.error(error) 
-        } finally {
-            await mongoClient.close()
         }
-        
-
     }
 });
