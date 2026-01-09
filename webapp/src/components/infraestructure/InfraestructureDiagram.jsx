@@ -32,7 +32,7 @@ dagreGraph.setDefaultEdgeLabel(() => ({}));
 const nodeWidth = 250;
 const nodeHeight = 130;
 
-const getLayoutedElements = (nodes, edges, direction = 'TB') => {
+const getLayoutedElements = (nodes, edges, status ,direction = 'TB') => {
   const isHorizontal = direction === 'LR';
   dagreGraph.setGraph({ rankdir: direction });
 
@@ -48,6 +48,9 @@ const getLayoutedElements = (nodes, edges, direction = 'TB') => {
 
   const layoutedNodes = nodes.map((node) => {
     const nodeWithPosition = dagreGraph.node(node.id);
+    const statusKey = node.data.type.includes('Azure Cosmos') ? 'statusCosmos' : node.data.type.includes('Mongo') ? 'statusMongo' : 'otherResources'
+    const isUp = status[statusKey] === 'connected' ? true : false
+    console.log(`${statusKey}: ${isUp}`)
     return {
       ...node,
       targetPosition: isHorizontal ? 'left' : 'top',
@@ -66,6 +69,18 @@ const getLayoutedElements = (nodes, edges, direction = 'TB') => {
                 </span>
                 <span className="text-gray-800 text-[10px] uppercase tracking-wide">
                     {node.data.type}
+                </span>
+                <span className="mt-1 relative flex h-3 w-3">
+                  <span
+                    className={`absolute inline-flex h-full w-full rounded-full opacity-75 ${
+                      isUp ? 'bg-emerald-400 animate-ping' : 'bg-red-400 animate-ping'
+                    }`}
+                  ></span>
+                  <span
+                    className={`relative inline-flex rounded-full h-3 w-3 ${
+                      isUp ? 'bg-emerald-500' : 'bg-red-500'
+                    }`}
+                  ></span>
                 </span>
             </div>
         )
@@ -92,7 +107,10 @@ export default function InfraestructureDiagram(){
                 const nodes = data.nodes
                 const edges = data.edges
 
-                const {nodes: layoutedNodes, edges: layoutedEdges} = getLayoutedElements(nodes,edges)
+                const responseStatus = await fetch(import.meta.env.PUBLIC_API_SYSTEM_STATUS_URL)
+                const status = await responseStatus.json()
+
+                const {nodes: layoutedNodes, edges: layoutedEdges} = getLayoutedElements(nodes,edges, status)
                 setNodes(layoutedNodes)
                 setEdges(layoutedEdges)
             }catch (error){

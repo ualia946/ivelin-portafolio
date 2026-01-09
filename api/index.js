@@ -5,6 +5,7 @@ const modules = [
 	'./src/functions/actualizarVisitas',
 	'./src/functions/obtenerInfraestructura',
 	'./src/functions/obtenerRespuestaChatBot',
+	'./src/functions/obtenerEstadoSistema'
 ];
 
 modules.forEach((m) => {
