@@ -1,6 +1,6 @@
 {
-  "name": "Portafolio Ivelin",
-  "short_name": "Portafolio Ivelin",
+  "name": "Ivelin Portafolio",
+  "short_name": "Ivelin Portafolio",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -16,6 +16,6 @@
     }
   ],
   "theme_color": "#ffffff",
-  "background_color": "#f32d2d",
+  "background_color": "#ffffff",
   "display": "standalone"
 }
