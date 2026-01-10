@@ -18,6 +18,14 @@ import { ChatBot } from "../components/commons/chatBot/ChatBot.jsx"
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="generator" content={Astro.generator} />
     <title>Ivelin Iliyanov Apostolov</title>
+    <script is:inline>
+      // Polyfill for WebGPU's GPUShaderStage to prevent three.js WebGPU modules from crashing
+      // in browsers where WebGPU isn't available. react-globe.gl uses three under the hood,
+      // and some builds may evaluate WebGPU code paths.
+      if (typeof window !== 'undefined' && typeof window.GPUShaderStage === 'undefined') {
+        window.GPUShaderStage = { VERTEX: 1, FRAGMENT: 2, COMPUTE: 4 };
+      }
+    </script>
   </head>
   <body class="bg-gray-950 text-white">
     <Navbar />

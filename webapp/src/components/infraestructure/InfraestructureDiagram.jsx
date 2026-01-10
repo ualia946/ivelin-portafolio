@@ -119,7 +119,6 @@ export default function InfraestructureDiagram(){
                 setIsLoading(false)
             }
         }
-
         getGraphElements()
     }, [])
 
@@ -134,7 +133,6 @@ export default function InfraestructureDiagram(){
                 <Background color="#4a5568" gap={16}/>
                 <Controls className=' border-2 border-[#e2e8f0] border-pu'/>
             </ReactFlow>)}
-               
         </div>
     )
 }
