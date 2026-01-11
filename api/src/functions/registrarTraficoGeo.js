@@ -6,8 +6,7 @@ app.http('registrarTraficoGeo', {
     authLevel: 'anonymous',
     handler: async (request, context) => {
         const header = request.headers.get('x-forwarded-for')
-        //const ip = header ? header.split(",")[0] : null
-        const ip = "1.1.1.1"
+        const ip = header ? header.split(",")[0] : null
         if(!ip){
             return {
                 status: 400,
