@@ -11,7 +11,7 @@ app.http('registrarTraficoGeo', {
         if(!ip){
             return {
                 status: 400,
-                jsonBody:{ message: "Error al obtener la IP" }
+                jsonBody:{ message: "Error al obtener la IP: ", ip }
             }
         }
         context.log(`🌍 Procesando ubicación de la IP: ${ip}`)
