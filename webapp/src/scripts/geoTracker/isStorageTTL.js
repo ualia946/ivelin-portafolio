@@ -8,14 +8,26 @@ export function shouldSendRegistrationTraffic(ttlMs = TTL_MS) {
 
     const raw = localStorage.getItem(KEY);
 
-    if (raw == null) return true;
+    if (raw == null){
+        console.log("No existe un registro de este navegador del usuario, se procederá a registrar...")
+        return true
+    } ;
 
     const lastSentMs = Number(raw);
-    if (!Number.isFinite(lastSentMs)) return true;
+    if (!Number.isFinite(lastSentMs)){
+        console.log("El formato numérico del último registro es incorrecto, volviendo a registrar...")
+        return true
+    }
 
     const nowMs = Date.now();
     const diffMs = nowMs - lastSentMs;
-    return diffMs >= ttlMs;
+    if (diffMs <= ttlMs){
+        console.log("Han pasado 24 horas desde el último registro, volviendo a registrar...")
+        return true
+    }
+
+    console.log("No se va a registrar la IP del usuario")
+    return false
 }
 
 export function markTrafficRegistration(nowMs = Date.now()) {
