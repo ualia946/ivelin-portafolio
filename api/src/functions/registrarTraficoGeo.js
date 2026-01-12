@@ -35,18 +35,24 @@ app.http('registrarTraficoGeo', {
         try {
             const geoResponse = await fetch(`https://ipwho.is/${ip}`)
             const geoData = await geoResponse.json()
+
+            // ipwho.is can return success=false or omit some fields; use optional chaining and sensible fallbacks
+            if (geoData && geoData.success === false) {
+                context.warn?.(`ipwho.is fallo: ${geoData.message ?? 'unknown error'}`)
+            }
+
             userLocation = {
-                id: geoData.ip,
+                id: geoData?.ip ?? ip,
                 type: partition_key,
-                protocol: geoData.type,
+                protocol: geoData?.type ?? null,
                 location:{
-                    country: geoData.country,
-                    country_code: geoData.country_code,
-                    city: geoData.city,
-                    emoji: geoData.flag.emoji
+                    country: geoData?.country ?? null,
+                    country_code: geoData?.country_code ?? null,
+                    city: geoData?.city ?? null,
+                    emoji: geoData?.flag?.emoji ?? null
                 },
-                latitude: geoData.latitude,
-                longitude: geoData.longitude,
+                latitude: geoData?.latitude ?? null,
+                longitude: geoData?.longitude ?? null,
                 lastUpdated: new Date().toISOString()
             }
             context.log(userLocation)
