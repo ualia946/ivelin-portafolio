@@ -11,6 +11,7 @@ export default function Globe3D() {
     const [points, setPoints] = useState([])
     const [arcs, setArcs] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [currentIp, setCurrentIp] = useState("")
 
     useEffect(() => {
         (async () => {
@@ -31,6 +32,14 @@ export default function Globe3D() {
                 setArcs(trafficArcs)
             } catch (error) {
                 console.error("Error al cargar el mapa: ", error)
+            }
+
+            try {
+                const response = await fetch("https://ipwho.is/")
+                const data = await response.json()
+                setCurrentIp(data.ip)
+            } catch (error) {
+                console.error("Erro al obtener la ip: ", error)
             }
 
             setIsLoading(false)
@@ -68,7 +77,7 @@ export default function Globe3D() {
                     pointsData={points}
                     pointLat="latitude"   
                     pointLng="longitude"
-                    pointColor={() => "#69c7c7"} 
+                    pointColor={(p) => (currentIp === p.id ? "#7836cf" : "#69c7c7")} 
                     pointAltitude={0.02}
                     pointRadius={0.2}
 
