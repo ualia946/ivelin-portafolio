@@ -33,14 +33,17 @@ export default function Globe3D() {
                 console.error("Error al cargar el mapa: ", error)
             }
 
-            if(globeEl.current){
-                globeEl.current.controls().autoRotate = true
-                globeEl.current.controls().autoRotateSpeed = 0.5
-            }
-
             setIsLoading(false)
+
         })()
     }, [])
+
+    useEffect(() => {
+        if(globeEl.current){
+            globeEl.current.controls().autoRotate = true
+            globeEl.current.controls().autoRotateSpeed = 0.5
+        }
+    }, [isLoading])
 
 
     return(
@@ -66,8 +69,8 @@ export default function Globe3D() {
                     pointLat="latitude"   
                     pointLng="longitude"
                     pointColor={() => "#69c7c7"} 
-                    pointAltitude={0.03}
-                    pointRadius={0.5}
+                    pointAltitude={0.02}
+                    pointRadius={0.2}
 
                     // --- CAPA DE ARCOS (Las conexiones) ---
                     arcsData={arcs}
