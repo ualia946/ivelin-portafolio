@@ -21,7 +21,7 @@ export function shouldSendRegistrationTraffic(ttlMs = TTL_MS) {
 
     const nowMs = Date.now();
     const diffMs = nowMs - lastSentMs;
-    if (diffMs <= ttlMs){
+    if (diffMs => ttlMs){
         console.log("Han pasado 24 horas desde el último registro, volviendo a registrar...")
         return true
     }
