@@ -66,10 +66,9 @@ async function loadToCosmosDB(transformedCosts){
     }
 }
 
-app.http('ETLCostesDiarios', {
-    methods: ['GET'],
-    authLevel: 'anonymous',
-    handler: async (request, context) => {
+app.timer('ETLCostesDiarios', {
+    schedule: "0 0 6 * * *",
+    handler: async (myTimer, context) => {
 
         const today = new Date()
         const yesterday = new Date(today)
