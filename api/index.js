@@ -7,7 +7,8 @@ const modules = [
 	'./src/functions/obtenerRespuestaChatBot',
 	'./src/functions/obtenerEstadoSistema',
 	'./src/functions/registrarTraficoGeo',
-	'./src/functions/obtenerTraficoGeo'
+	'./src/functions/obtenerTraficoGeo',
+	'./src/functions/ETLCostesDiarios'
 ];
 
 modules.forEach((m) => {

@@ -8,6 +8,7 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
+    "@azure/arm-costmanagement": "^1.0.0-beta.1",
     "@azure/arm-resourcegraph": "^4.2.1",
     "@azure/cosmos": "^4.9.0",
     "@azure/functions": "^4.0.0",
