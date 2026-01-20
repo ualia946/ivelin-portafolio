@@ -36,6 +36,14 @@ resource "azurerm_cosmosdb_sql_container" "container_visitas" {
   partition_key_paths = ["/type"]
 }
 
+resource "azurerm_cosmosdb_sql_container" "container_costs" {
+  name = "Costs"
+  resource_group_name = azurerm_resource_group.rg-webapp.name
+  account_name = azurerm_cosmosdb_account.db_account.name
+  database_name = azurerm_cosmosdb_sql_database.db_sql.name
+  partition_key_paths = ["/type"]
+}
+
 resource "random_string" "suffix" {
   length = 6
   special = false

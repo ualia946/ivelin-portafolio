@@ -49,6 +49,7 @@ resource "azurerm_function_app_flex_consumption" "function-app" {
       "COSMOS_DB_KEY" = var.cosmos_db_key
       "GEMINI_API" = var.gemini_api
       "MONGODB_URI" = var.mongo_password,
+      "RESOURCE_GROUP_NAME" = azurerm_resource_group.rg-webapp.name
       "AzureWebJobsFeatureFlags" = "EnableWorkerIndexing",
       "FUNCTIONS_NODE_BLOCK_ON_ENTRY_POINT_ERROR" = "true"
     }
