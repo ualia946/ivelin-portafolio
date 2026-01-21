@@ -3,6 +3,13 @@ const { DefaultAzureCredential } = require('@azure/identity')
 const { CostManagementClient } = require("@azure/arm-costmanagement")
 const { CosmosClient } = require('@azure/cosmos')
 
+const client = new CosmosClient({
+    endpoint: process.env.COSMOS_DB_ENDPOINT,
+    key: process.env.COSMOS_DB_KEY
+})
+
+const container = client.database("PortfolioDB").container("Costs")
+
 async function extractCosts(today, yesterday){
     const credential = new DefaultAzureCredential()
     const client = new CostManagementClient(credential, process.env.SUBSCRIPTION_ID)
@@ -49,25 +56,20 @@ function transfromCosts(dailyCosts, today, yesterday){
 }
 
 async function loadToCosmosDB(transformedCosts){
-    const client = new CosmosClient({
-        endpoint: process.env.COSMOS_DB_ENDPOINT,
-        key: process.env.COSMOS_DB_KEY
-    })
 
-    const container = client.database("PortfolioDB").container("Costs")
 
     for(let tc of transformedCosts){
         try {
             await container.items.upsert(tc)
         } catch (error) {
             console.error(`Error al guardar el costo ${tc.id}:`, error.message)
-            return {code: 500, jsonBody: {message: error.message}}
+            continue
         }
     }
 }
 
 app.timer('ETLCostesDiarios', {
-    schedule: "0 0 6 * * *",
+    schedule: "0 50 10 * * *",
     handler: async (myTimer, context) => {
 
         const today = new Date()
