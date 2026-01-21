@@ -49,7 +49,7 @@ function transfromCosts(dailyCosts, today, yesterday){
             currency: c[4],
             serviceName: c[2],
             resourceLocation: c[3],
-            ingestedData: new Date(today.setUTCHours(6,0,0,0)).toISOString()
+            ingestedData: new Date(today.setUTCHours(13,0,0,0)).toISOString()
         }
     ))
     return transformedCosts
