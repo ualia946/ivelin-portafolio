@@ -69,7 +69,7 @@ async function loadToCosmosDB(transformedCosts){
 }
 
 app.timer('ETLCostesDiarios', {
-    schedule: "0 0 38 11 * *",
+    schedule: "*/10 * * * * *",
     handler: async (myTimer, context) => {
         const today = new Date()
         const yesterday = new Date(today)
