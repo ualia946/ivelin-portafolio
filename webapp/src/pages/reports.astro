@@ -1,0 +1,10 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PowerBIReports from "../components/reports/PowerBIReports";
+---
+
+<Layout title="Informes" about="Informes">
+  <div class="pt-24 px-5 md:px-10 pb-10 min-h-screen flex flex-col gap-3.5">
+    <PowerBIReports client:only="react" />
+  </div>
+</Layout>

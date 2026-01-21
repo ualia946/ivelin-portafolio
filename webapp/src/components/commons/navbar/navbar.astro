@@ -8,8 +8,9 @@ const links = [
   { name: "Proyectos", href: "/proyectos" },
   { name: "Sobre Mi", href: "/about" },
   { name: "Contacto", href: "/contact" },
-  { name: "Infraestructura", href: "/infraestructure"},
-  { name: "Mapa", href: "/map"}
+  { name: "Infraestructura", href: "/infraestructure" },
+  { name: "Mapa", href: "/map" },
+  { name: "Informes", href: "/reports" },
 ];
 ---
 
@@ -120,10 +121,10 @@ const links = [
     function markActiveLinks() {
       const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
       const desktopLinks = Array.from(
-        document.querySelectorAll("#navbar-links .nav-link")
+        document.querySelectorAll("#navbar-links .nav-link"),
       );
       const mobileLinks = Array.from(
-        document.querySelectorAll("#navbar-links-mobile .nav-link-mobile")
+        document.querySelectorAll("#navbar-links-mobile .nav-link-mobile"),
       );
 
       const allLinks = [...desktopLinks, ...mobileLinks];
