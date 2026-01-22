@@ -12,7 +12,7 @@ const container = client.database("PortfolioDB").container("Costs")
 
 async function extractCosts(today, yesterday){
     const credential = new DefaultAzureCredential()
-    const client = new CostManagementClient(credential, process.env.SUBSCRIPTION_ID)
+    const client = new CostManagementClient(credential, process.env.SUBSCRIPTIOGN_ID)
 
     const from = new Date(yesterday.setUTCHours(0,0,0,0)).toISOString()
     const to = new Date(yesterday.setUTCHours(23,59,59,999)).toISOString()
@@ -69,7 +69,7 @@ async function loadToCosmosDB(transformedCosts){
 }
 
 app.timer('ETLCostesDiarios', {
-    schedule: "*/20 * * * * *",
+    schedule: "0 0 6 * * *",
     handler: async (myTimer, context) => {
         const today = new Date()
         const yesterday = new Date(today)
