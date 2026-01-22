@@ -2,7 +2,7 @@ import { FaChartPie } from 'react-icons/fa';
 
 export default function PowerBIReports() {
   const REPORTS = [
-    ["Coste Infraestructura", 'https://app.powerbi.com/view?r=eyJrIjoiZDY2ZjYzMTUtOTg2MS00NWMwLTk3NjYtYzU2MmJhNGYzZjFkIiwidCI6IjY2MDBhZTk3LWEwZTktNDdhMC05MTRkLWQ1NWY2ZDFhOGY1YSIsImMiOjh9'],
+    ["Coste Infraestructura", '/informe-costes'],
   ]
 
   return (
