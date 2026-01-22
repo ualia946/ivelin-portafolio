@@ -51,7 +51,8 @@ resource "azurerm_function_app_flex_consumption" "function-app" {
       "MONGODB_URI" = var.mongo_password,
       "RESOURCE_GROUP_NAME" = azurerm_resource_group.rg-webapp.name
       "AzureWebJobsFeatureFlags" = "EnableWorkerIndexing",
-      "FUNCTIONS_NODE_BLOCK_ON_ENTRY_POINT_ERROR" = "true"
+      "FUNCTIONS_NODE_BLOCK_ON_ENTRY_POINT_ERROR" = "true",
+      "SUBSCRIPTION_ID":"38e17e66-df57-442d-8803-7823dad33a58"
     }
 
     identity {
