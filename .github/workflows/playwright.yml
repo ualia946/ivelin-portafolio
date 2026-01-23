@@ -24,6 +24,10 @@ env:
   GEMINI_API: ${{ secrets.GEMINI_API }}
   SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+permissions:
+  id-token: write
+  contents: read
+  
 jobs:
   test:
   
