@@ -13,8 +13,16 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-    - name: Install dependencies
+    - name: Install dependencies (Root)
       run: npm ci
+    - name: Install dependencies (Webapp)
+      run: |
+        cd webapp
+        npm ci
+    - name: Install dependencies (API)
+      run: |
+        cd api
+        npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
