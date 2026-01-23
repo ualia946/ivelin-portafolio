@@ -7,9 +7,10 @@ on:
 permissions:
   id-token: write
   contents: read
-  
+
 jobs:
     detect-changes:
+        name: "Detech changes on Repository"
         runs-on: ubuntu-latest
         outputs:
             api: ${{ steps.changes.outputs.api }}
