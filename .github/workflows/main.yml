@@ -1,35 +1,45 @@
-name: Despliege Web App Astro
+name: Main CI/CD Pipeline
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - 'webapp/**'
-
+    push:
+    pull_request:
+        branches: ['main']
 jobs:
-  build_and_deploy:
-    name: Build and Deploy Job
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout del código
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-          
-      - name: Construir y Desplegar App Astro
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          action: upload
-          app_location: "/webapp"
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          output_location: "dist"
+    detect-changes:
+        runs-on: ubuntu-latest
+        outputs:
+            api: ${{ steps.changes.outputs.api }}
+            webapp: ${{ steps.changes.outputs.webapp }}
+        steps:
+            - name: "Checkout repository"
+              uses: actions/checkout@v4
 
-        env:
-          PUBLIC_API_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/actualizarvisitas
-          PUBLIC_API_CHATBOT_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/obtenerRespuestaChatBot
-          PUBLIC_API_INFRAESTRUCTURE_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/obtenerInfraestructura
-          PUBLIC_API_SYSTEM_STATUS_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/obtenerEstadoSistema
-          PUBLIC_API_GET_LOCATIONS_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/obtenerTraficoGeo
-          PUBLIC_API_REGISTER_LOCATION_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/registrarTraficoGeo
+            - name: "Detect repository path changes"
+              uses: dorny/paths-filter@v2
+              id: changes
+              with:
+                filters: |
+                    api:
+                        - 'api/**'
+                    webapp:
+                        - 'webapp/**'
+                        
+    quality-gate:
+        name: "Test (Playwright)"
+        uses: ./.github/workflows/playwright.yml
+        secrets: inherit
+        needs: detect-changes
+         
+    deploy-api:
+        name: "Deploy API"
+        needs: [detect-changes ,quality-gate]
+        if: ${{ needs.detect-changes.outputs.api == 'true' }}
+        uses: ./.github/workflows/deploy-api.yml
+        secrets: inherit
+        
+    deploy-webapp:
+        name: "Deploy Webapp"
+        needs: [detect-changes ,quality-gate]
+        if: ${{ needs.detect-changes.outputs.webapp == 'true' }}
+        uses: ./.github/workflows/deploy-webapp.yml
+        secrets: inherit
+        
