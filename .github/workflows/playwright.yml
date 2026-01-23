@@ -5,12 +5,25 @@ on:
   pull_request:
     branches: [ main, master ]
 env:
+  #Frontend
   PUBLIC_API_URL: "http://localhost:7071/api/actualizarVisitas"
   PUBLIC_API_CHATBOT_URL: "http://localhost:7071/api/obtenerRespuestaChatBot"
   PUBLIC_API_INFRAESTRUCTURE_URL: "http://localhost:7071/api/obtenerInfraestructura"
   PUBLIC_API_SYSTEM_STATUS_URL: "http://localhost:7071/api/obtenerEstadoSistema"
   PUBLIC_API_GET_LOCATIONS_URL: "http://localhost:7071/api/obtenerTraficoGeo"
   PUBLIC_API_REGISTER_LOCATION_URL: "http://localhost:7071/api/registrarTraficoGeo"
+
+  #Backend 
+  FUNCTIONS_WORKER_RUNTIME: "node"
+  AzureWebJobsFeatures: "EnableWorkerIndexing"
+  RESOURCE_GROUP_NAME: "rg-webapp"
+  AzureWebJobsStorage: ${{ secrets.AZUREWEBJOBSSTORAGE }}
+  COSMOS_DB_ENDPOINT: ${{ secrets.COSMOS_DB_ENDPOINT }}
+  COSMOS_DB_KEY: ${{ secrets.COSMOS_DB_KEY }}
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
+  GEMINI_API: ${{ secrets.GEMINI_API }}
+  SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
 jobs:
   test:
     timeout-minutes: 60
