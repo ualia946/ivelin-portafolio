@@ -3,6 +3,11 @@ on:
     push:
     pull_request:
         branches: ['main']
+
+permissions:
+  id-token: write
+  contents: read
+  
 jobs:
     detect-changes:
         runs-on: ubuntu-latest
@@ -22,7 +27,7 @@ jobs:
                         - 'api/**'
                     webapp:
                         - 'webapp/**'
-                        
+
     quality-gate:
         name: "Test (Playwright)"
         uses: ./.github/workflows/playwright.yml
