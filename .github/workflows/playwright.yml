@@ -26,6 +26,9 @@ env:
 
 jobs:
   test:
+    permissions:
+        id-token: write
+        contents: read
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
