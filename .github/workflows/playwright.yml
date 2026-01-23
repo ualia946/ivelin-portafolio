@@ -4,6 +4,13 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+env:
+  PUBLIC_API_URL: "http://localhost:7071/api/actualizarVisitas"
+  PUBLIC_API_CHATBOT_URL: "http://localhost:7071/api/obtenerRespuestaChatBot"
+  PUBLIC_API_INFRAESTRUCTURE_URL: "http://localhost:7071/api/obtenerInfraestructura"
+  PUBLIC_API_SYSTEM_STATUS_URL: "http://localhost:7071/api/obtenerEstadoSistema"
+  PUBLIC_API_GET_LOCATIONS_URL: "http://localhost:7071/api/obtenerTraficoGeo"
+  PUBLIC_API_REGISTER_LOCATION_URL: "http://localhost:7071/api/registrarTraficoGeo"
 jobs:
   test:
     timeout-minutes: 60
