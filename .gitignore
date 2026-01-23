@@ -24,3 +24,10 @@ pnpm-debug.log*
 .idea/
 
 prueba-ia/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

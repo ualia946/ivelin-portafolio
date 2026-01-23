@@ -171,6 +171,7 @@ export const ChatBot = () => {
       {!isOpen && (
         <button 
           onClick={toggleChat}
+          id='open-chat'
           className='
             fixed
             bottom-4 sm:bottom-6 md:bottom-10
