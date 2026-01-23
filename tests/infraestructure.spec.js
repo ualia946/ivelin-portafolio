@@ -37,3 +37,54 @@ test("Aristas del grafo generadas", async({page}) => {
     const edgesNumber = await page.locator('.react-flow__edge-interaction').count()
     expect(edgesNumber).toBeGreaterThan(0)
 })
+
+test("El nodo se pone en rojo si el servicio está detenido o sin funcionar", async({page}) => {
+    await page.route('**/api/obtenerInfraestructura', async route => {
+        const fakeResponse = {
+            nodes: [
+                {
+                    id: "rg-webapp",
+                    position: {x:0, y:0},
+                    data: { label: "rg-webapp", name: "rg-webapp", type: "Resource Group", location: "Spain Central" }
+                },
+                {
+                    id: "cosmos-db-test", 
+                    position: {x:100, y:0},
+                    data: {
+                        name: "cosmos-ivelin-portafolio",
+                        type: "Azure Cosmos DB", 
+                        location: "westeurope"
+                    }   
+                }
+            ],
+            edges: [
+                {
+                    id: "edge-1",
+                    source: "rg-webapp",
+                    target: "cosmos-db-test",
+                    label: "Contiene"
+                }
+            ]
+        };
+        await route.fulfill({ json: fakeResponse });
+    })
+
+    await page.route('**/api/obtenerEstadoSistema', async route => {
+        const fakeStatus = {
+            statusCosmos: 'disconnected',
+            statusMongo: 'connected',
+            otherResources: 'connected'
+        };
+        await route.fulfill({ json: fakeStatus });
+    })
+
+
+    await page.goto("/infraestructure");
+    await page.waitForSelector('.react-flow__node', { state: 'visible', timeout: 10000 });
+
+    const node = page.locator('.react-flow__node').filter({ hasText: 'cosmos-ivelin-portafolio' });
+    await expect(node).toBeVisible();
+
+    const redLight = node.locator('.bg-red-500');
+    await expect(redLight).toBeVisible();
+})
