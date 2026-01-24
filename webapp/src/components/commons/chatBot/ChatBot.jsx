@@ -61,15 +61,17 @@ export const ChatBot = () => {
   return (
     <>
       {isOpen && (
-        <div className='
-          flex flex-col fixed
-          w-full sm:w-96 md:w-[425px]
-          h-[70vh] sm:h-[500px] md:h-[600px]
-          bottom-0 sm:bottom-10 md:bottom-20
-          right-0 sm:right-4 md:right-10
-          rounded-t-2xl sm:rounded-2xl
-          shadow-2xl
-          z-50
+        <div
+          data-testid='chatBot'
+          className='
+            flex flex-col fixed
+            w-full sm:w-96 md:w-[425px]
+            h-[70vh] sm:h-[500px] md:h-[600px]
+            bottom-0 sm:bottom-10 md:bottom-20
+            right-0 sm:right-4 md:right-10
+            rounded-t-2xl sm:rounded-2xl
+            shadow-2xl
+            z-50
         '>
           {/* Header */}
           <div className='
@@ -151,6 +153,7 @@ export const ChatBot = () => {
               '
             />
             <button 
+              data-testid='sendButton'
               onClick={handleSubmit}
               className='
                 bg-[#7836cf]
