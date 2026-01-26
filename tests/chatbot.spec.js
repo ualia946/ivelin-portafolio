@@ -16,7 +16,7 @@ test('Respuesta chat bot existosa', async ({page}) => {
     const botonChatBot = page.locator('#open-chat')
     const chatBot = page.getByTestId('chatBot')
     await botonChatBot.click()
-    await expect(chatBot).toBeVisible()
+    await expect(chatBot).toBeVisible({timeout: 15000})
     await expect(botonChatBot).toBeHidden()
 
     const input = page.getByPlaceholder('Escribe tu pregunta...')

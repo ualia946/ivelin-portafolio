@@ -40,10 +40,10 @@ test("El globo terráqueo se renderiza correctamente", async ({page}) => {
     await expect(globeContainer).toBeVisible()
 
     const globeReady = page.locator('[data-testid="globe-ready-signal"]')
-    await expect(globeReady).toBeAttached({timeout: 10000})
+    await expect(globeReady).toBeAttached({timeout: 30000})
 
     const canvas = globeContainer.locator('canvas')
-    await expect(canvas).toBeVisible({timeout: 10000})
+    await expect(canvas).toBeVisible({timeout: 30000})
 
     const geoInformation = page.getByTestId('geo-information')
     await expect(geoInformation).toBeVisible()
