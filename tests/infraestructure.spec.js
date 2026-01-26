@@ -11,6 +11,7 @@ test("Nodos del grafo generados", async ({page}) => {
 
 test("Nodo raíz generado correctamente", async({page}) => {
     await page.goto("/infraestructure")
+    await page.waitForSelector('.react-flow__node', {state: 'visible'})
     const rootNode = page.locator('.react-flow__node').filter({hasText: 'rg-webapp'})
     await expect(rootNode).toBeVisible()
 })
