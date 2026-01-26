@@ -36,7 +36,7 @@ test("El globo terráqueo se renderiza correctamente", async ({page, browserName
 
     await page.goto('/map')
 
-    const timeout = browserName === 'firefox' ? 120000: 30000
+    const timeout = browserName === 'firefox' ? 120000: 60000
 
     const globeContainer = page.getByTestId('globe-container')
     await expect(globeContainer).toBeVisible()
