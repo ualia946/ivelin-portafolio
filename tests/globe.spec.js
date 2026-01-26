@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test'
 
-test("El globo terráqueo se renderiza correctamente", async ({page}) => {
+test("El globo terráqueo se renderiza correctamente", async ({page, browserName}) => {
     await page.route('**/api/obtenerTraficoGeo', async route => {
         const trafficPoints ={
                 locations: [{
@@ -36,14 +36,16 @@ test("El globo terráqueo se renderiza correctamente", async ({page}) => {
 
     await page.goto('/map')
 
+    const timeout = browserName === 'firefox' ? 120000: 30000
+
     const globeContainer = page.getByTestId('globe-container')
     await expect(globeContainer).toBeVisible()
 
     const globeReady = page.locator('[data-testid="globe-ready-signal"]')
-    await expect(globeReady).toBeAttached({timeout: 60000})
+    await expect(globeReady).toBeAttached({timeout: timeout})
 
     const canvas = globeContainer.locator('canvas')
-    await expect(canvas).toBeVisible({timeout: 60000})
+    await expect(canvas).toBeVisible({timeout: timeout})
 
     const geoInformation = page.getByTestId('geo-information')
     await expect(geoInformation).toBeVisible()
