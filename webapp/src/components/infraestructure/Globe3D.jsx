@@ -15,6 +15,7 @@ export default function Globe3D() {
     const [currentFlagCountry, setCurrentFlagCountry] = useState()
     const [countryName, setCountryName] = useState("")
     const [cityName, setCityName] = useState("")
+    const [isGlobeReady, setIsGlobeReady] = useState(false)
 
     useEffect(() => {
         (async () => {
@@ -63,15 +64,15 @@ export default function Globe3D() {
 
     return(
         <>
-            <div className=' w-full h-[840px] lg:h-[890px] flex justify-center items-center p-20'>
+            <div data-testid='globe-container' className=' w-full h-[840px] lg:h-[890px] flex justify-center items-center p-20'>
                 {isLoading ?
                     <BounceLoader 
                         color='#57fff9' 
                         size={200} 
                         speedMultiplier={2} 
                     /> 
-                    : 
-                    <Globe
+                    :
+                    (<Globe
                         ref={globeEl}
                 
                         // --- APARIENCIA GLOBAL ---
@@ -96,30 +97,33 @@ export default function Globe3D() {
                         arcDashAnimateTime={1500}  
                         // arcStroke={null}        // Descomenta esto si quieres que solo se vean los "rayos" y no la línea base
 
-                        // --- TAMAÑO ---
+                        onGlobeReady={() => setIsGlobeReady(true)}
                     
                     />
-                }
+                )}
+                {isGlobeReady && (<div data-testid='globe-ready-signal' style={{display: 'none'}}></div>)}
             </div>
 
-            {!isLoading && <div className=' 
-                z-50
-                fixed
-                bottom-4 sm:bottom-6 md:bottom-10
-                left-0 sm:left-6 md:left-10
-                pointer-events-none
-                bg-white/10
-                border border-white/20
-                backdrop-blur-sm
-                shadow-lg
-                rounded-md
-                px-3
-                py-1 
-                sm: text-sm
-                md: text-[1rem]
-                ml-5
-                transition-opacity
-                animated-pulse '
+            {!isLoading && <div
+                data-testid = 'geo-information'
+                className=' 
+                    z-50
+                    fixed
+                    bottom-4 sm:bottom-6 md:bottom-10
+                    left-0 sm:left-6 md:left-10
+                    pointer-events-none
+                    bg-white/10
+                    border border-white/20
+                    backdrop-blur-sm
+                    shadow-lg
+                    rounded-md
+                    px-3
+                    py-1 
+                    sm: text-sm
+                    md: text-[1rem]
+                    ml-5
+                    transition-opacity
+                    animated-pulse '
             >
                 {`${currentFlagCountry} ${countryName}, ${cityName}`}
             </div>}
