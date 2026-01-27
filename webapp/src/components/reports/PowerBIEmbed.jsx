@@ -31,16 +31,16 @@ export default function PowerBIEmbed({
   };
 
   return (
-    <div className="powerbi-container w-full relative">
+    <div className="powerbi-container w-full relative flex justify-center items-center">
       {/* Contenedor del iframe */}
       <div
         data-testid='iframe-container'
-        className="relative w-full overflow-hidden rounded-lg shadow-xl"
+        className="relative w-full overflow-hidden rounded-lg shadow-xl md:w-11/12"
         style={{
           // Altura adaptada según el dispositivo
           // Móvil: más alto para scroll vertical
           // Escritorio: ratio 16:9 típico
-          paddingBottom: isMobile ? '200%' : '56.25%',
+          paddingBottom: isMobile ? '200%' : '55%',
         }}
       >
         {/* Indicador de carga superpuesto */}

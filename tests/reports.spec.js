@@ -7,7 +7,7 @@ test("Informe generado correctamente", async ({page}) => {
     await expect(informe).toBeVisible({timeout: 30000})
 
     const contenedorInforme = page.getByTestId('iframe-container')
-    await expect(contenedorInforme).toHaveAttribute('style', /padding-bottom:\s*56.25%/)
+    await expect(contenedorInforme).toHaveAttribute('style', /padding-bottom:\s*55%/)
 })
 
 test.describe('Versión Móvil', () => {
