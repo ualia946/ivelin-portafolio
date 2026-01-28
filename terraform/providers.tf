@@ -5,6 +5,12 @@ terraform {
       version = ">= 4.0"
     }
   }
+  cloud {
+    organization = "ivelin-org"
+    workspaces {
+      name = "ivelin-portafolio"
+    }
+  }
 }
 
 provider "azurerm" {

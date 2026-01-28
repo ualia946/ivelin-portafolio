@@ -31,3 +31,11 @@ prueba-ia/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+#Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+.terraform.tfvars
+/terraform/terraform.tfvars

@@ -41,6 +41,8 @@ resource "azurerm_function_app_flex_consumption" "function-app" {
       cors {
         allowed_origins = ["https://${azurerm_static_web_app.web_portfolio.default_host_name}", "https://www.ivelinapostolov.com"]
       }
+      application_insights_connection_string = azurerm_application_insights.app_insights.connection_string
+      application_insights_key = azurerm_application_insights.app_insights.instrumentation_key
     }
 
     app_settings = {
@@ -59,6 +61,13 @@ resource "azurerm_function_app_flex_consumption" "function-app" {
       type = "SystemAssigned"
     }
     
+}
+
+resource "azurerm_application_insights" "app_insights" {
+  name = "func-portfolio-api-${random_string.suffix.result}"
+  location = azurerm_resource_group.rg-webapp.location
+  resource_group_name = azurerm_resource_group.rg-webapp.name
+  application_type = "web"
 }
 
 

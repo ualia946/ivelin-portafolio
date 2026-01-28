@@ -6,6 +6,10 @@ resource "azurerm_static_web_app" "web_portfolio" {
   sku_size = "Free"
   sku_tier = "Free"
 
+  repository_branch = "main"
+  repository_url = "https://github.com/ualia946/ivelin-portafolio"
+  repository_token = var.github_token
+
   tags = {
     Environment = "Production"
     Project = "Portfolio"

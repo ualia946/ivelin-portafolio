@@ -4,6 +4,7 @@ resource "azurerm_cosmosdb_account" "db_account" {
   resource_group_name = azurerm_resource_group.rg-webapp.name
   offer_type = "Standard"
   kind = "GlobalDocumentDB"
+  analytical_storage_enabled = true
 
   free_tier_enabled = "true"
 

@@ -27,3 +27,9 @@ variable "cosmos_db_endpoint" {
    type = string
    sensitive = true
  }
+
+ variable "github_token" {
+   description = "Token de GitHub para permitir a SWA comunicarse con el repositorio"
+   type = string
+   sensitive = true
+ }
