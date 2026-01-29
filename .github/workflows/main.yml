@@ -1,8 +1,14 @@
 name: Main CI/CD Pipeline
 on:
     push:
+        paths:
+            - 'api/**'
+            - 'webapp/**'
     pull_request:
         branches: ['main']
+        paths:
+            - 'api/**'
+            - 'webapp/**'
 
 permissions:
     contents: read
