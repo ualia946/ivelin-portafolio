@@ -1,6 +1,7 @@
 name: Main CI/CD Pipeline
 on:
     push:
+        branches: ['main']
         paths:
             - 'api/**'
             - 'webapp/**'
