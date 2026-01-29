@@ -33,3 +33,9 @@ variable "cosmos_db_endpoint" {
    type = string
    sensitive = true
  }
+
+ variable "subscription_id" {
+   description = "Id de la suscripción de Azure"
+   type = string
+   sensitive = true
+ }
