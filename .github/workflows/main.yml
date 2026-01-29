@@ -5,8 +5,10 @@ on:
         branches: ['main']
 
 permissions:
-  id-token: write
-  contents: read
+    contents: read
+    packages: write
+    attestations: write
+    id-token: write
 
 jobs:
     detect-changes:

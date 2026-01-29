@@ -1,0 +1,63 @@
+name: "Build and Deploy PDF Service Image"
+
+on:
+    workflow_dispatch:
+    push:
+        tags:
+            - 'pdf-v*'
+    
+
+permissions:
+    contents: read
+    packages: write
+    attestations: write
+    id-token: write
+
+env:
+    REGISTRY: ghcr.io
+    IMAGE_NAME: "ualia946/pdf-cv-generator"
+    
+jobs:
+    build-and-push-image:
+        name: Build Docker Image
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: "Checkout repository"
+              uses: actions/checkout@v4
+
+            - name: "Log in to the Container registry"
+              uses: docker/login-action@v3
+              with:
+                registry: ${{ env.REGISTRY }}
+                username: ${{ github.actor }}
+                password: ${{ secrets.TOKEN_GITHUB }}
+            
+            - name: Extract metadata (tag and labels) for Docker
+              id: meta
+              uses: docker/metadata-action@v5
+              with:
+                images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+                   
+            - name: Build and push Docker image
+              id: push
+              uses: docker/build-push-action@v5
+              with:
+                context: ./pdf-service/
+                push: true
+                tags: ${{ steps.meta.outputs.tags }}
+                labels: ${{ steps.meta.outputs.labels }}
+            
+            - name: Delete old version image
+              uses: actions/delete-package-versions@v5
+              with:
+                package-name: 'pdf-cv-generator'
+                package-type: 'container'
+                min-versions-to-keep: 2
+                delete-only-untagged-versions: false
+                token: ${{ secrets.TOKEN_GITHUB }}
+            
+        
+                
+            
+            
