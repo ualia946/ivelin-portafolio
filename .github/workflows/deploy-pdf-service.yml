@@ -16,7 +16,9 @@ permissions:
 env:
     REGISTRY: ghcr.io
     IMAGE_NAME: "ualia946/pdf-cv-generator"
-    
+    CONTAINER_APP_NAME: "ca-pdf-generator"
+    RESOURCE_GROUP: "rg-webapp"
+
 jobs:
     build-and-push-image:
         name: Build Docker Image
@@ -58,8 +60,12 @@ jobs:
                 token: ${{ secrets.TOKEN_GITHUB }}
     
     deploy-image-aca:
+      environment: 
+        name: 'Production'
+      needs: build-and-push-image
       name: "Image deploy to ACA"
       runs-on: ubuntu-latest
+      
       steps:
         - name: Login to Azure
           uses: azure/login@v2
@@ -68,14 +74,16 @@ jobs:
             tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_AEE88C9DB6BD4147A176D36AD2761518 }}
             subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8DC390769A7343AC85E2AF2796D41C4F }}
 
-        - name: Deploy private GHCR image to Container App
-          uses: azure/container-apps-deploy-action@v1
+        - name: Deploy new image via Azure CLI
+          uses: azure/CLI@v1
           with:
-            containerAppName: pdf-cv-generator
-            resourceGroup: rg-webapp
-            imageToDeploy: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            registryUsername: ${{ github.actor }}
-            registryPassword: ${{ secrets.TOKEN_GITHUB}}
+            inlineScript: |
+              az config set extension.use_dynamic_install=yes_without_prompt
+                 
+              az containerapp update \
+                --name ${{ env.CONTAINER_APP_NAME }} \
+                --resource-group ${{ env.RESOURCE_GROUP }} \
+                --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.ref_name }}
 
 
             
