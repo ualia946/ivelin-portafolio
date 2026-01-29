@@ -40,4 +40,10 @@ resource "azurerm_container_app" "pdf_service" {
     }
   }
 
+  lifecycle {
+    ignore_changes = [ 
+      template[0].container[0].image
+     ]
+  }
+
 }
