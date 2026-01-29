@@ -56,6 +56,28 @@ jobs:
                 min-versions-to-keep: 2
                 delete-only-untagged-versions: false
                 token: ${{ secrets.TOKEN_GITHUB }}
+    
+    deploy-image-aca:
+      name: "Image deploy to ACA"
+      runs-on: ubuntu-latest
+      steps:
+        - name: Login to Azure
+          uses: azure/login@v2
+          with:
+            client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C2F9ABB718B24F1B828033AC756B768A }}
+            tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_AEE88C9DB6BD4147A176D36AD2761518 }}
+            subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_8DC390769A7343AC85E2AF2796D41C4F }}
+
+        - name: Deploy private GHCR image to Container App
+          uses: azure/container-apps-deploy-action@v1
+          with:
+            containerAppName: pdf-cv-generator
+            resourceGroup: rg-webapp
+            imageToDeploy: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            registryUsername: ${{ github.actor }}
+            registryPassword: ${{ secrets.TOKEN_GITHUB}}
+
+
             
         
                 
