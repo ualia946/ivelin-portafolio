@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CV Generado</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1.5cm;
+        }
+
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: #333;
+            line-height: 1.5;
+            font-size: 12px;
+        }
+
+        /* --- ENCABEZADO --- */
+        .header {
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        address.contact-info {
+            font-style: normal; 
+            margin-top: 5px;
+            color: #555;
+            font-size: 11px;
+        }
+        .contact-info a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        h2.section-title {
+            background-color: #f0f2f5;
+            color: #2c3e50;
+            padding: 5px 10px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-left: 5px solid #2c3e50;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.2; 
+        }
+
+        article.experience-item {
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+        
+        header.experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 2px;
+        }
+        
+        h3.project-title {
+            font-weight: bold;
+            font-size: 13px;
+            color: #000;
+            margin: 0; 
+            display: inline-block;
+        }
+        
+        .stack-list {
+            font-style: italic;
+            color: #666;
+            font-size: 10px;
+            margin-bottom: 5px;
+            display: block; 
+        }
+
+        ul {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 2px;
+        }
+        
+        h3.skill-category-title {
+            margin: 5px 0; 
+            font-size: 12px; 
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>{{ data.fullname }}</h1>
+        
+        <address class="contact-info">
+            <span>{{ data.role }}</span> <br>
+            <span>{{ data.location }}</span> |
+            <span>{{ data.phone }}</span> |
+            <span>{{ data.email }}</span> <br>
+            <a href="{{ data.linkedin_url }}">LinkedIn</a> | 
+            <a href="{{ data.github_url }}">GitHub</a>
+        </address>
+    </header>
+
+    <section id="summary">
+        <h2 class="section-title">Resumen Profesional</h2>
+        <p style="text-align: justify;">{{ data.summary }}</p>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title">Experiencia y Proyectos Destacados</h2>
+        
+        {% for exp in data.experience %}
+            <article class="experience-item">
+                <header class="experience-header">
+                    <h3 class="project-title">{{ exp.project_name }}</h3>
+                </header>
+                
+                <span class="stack-list">
+                    Stack: {{ exp.stack | join(', ') }}
+                </span>
+
+                <ul>
+                    {% for achieve in exp.achievements %}
+                        <li>{{ achieve }}</li>
+                    {% endfor %}
+                </ul>
+            </article>
+        {% endfor %}
+    </section>
+
+    <section id="education">
+        <h2 class="section-title">Educación y Certificaciones</h2>
+        <ul>
+            {% for e in data.education %}
+                <li>
+                    <strong>{{ e.institution }}</strong>: {{ e.degree }} | {{ e.year }}
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Habilidades Técnicas</h2>
+        {% for skillCategory in data.skills %}
+            <div style="margin-bottom: 10px;">
+                <h3 class="skill-category-title">{{ skillCategory.category_name }}</h3>
+                <ul style="margin-top: 0;">
+                    {% for skillSub in skillCategory.skills %}
+                        <li>
+                            <b>{{ skillSub.subcategory_name }}:</b> 
+                            {{ skillSub.keywords | join(', ') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </section>
+</body>
+</html>
