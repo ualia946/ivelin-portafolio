@@ -38,6 +38,9 @@ resource "azurerm_container_app" "pdf_service" {
       percentage = 100
       latest_revision = true
     }
+    cors {
+      allowed_origins = ["https://${azurerm_static_web_app.web_portfolio.default_host_name}", "https://www.ivelinapostolov.com"]
+    }
   }
 
   lifecycle {
@@ -45,5 +48,7 @@ resource "azurerm_container_app" "pdf_service" {
       template[0].container[0].image
      ]
   }
+
+  
 
 }
