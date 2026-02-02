@@ -1,4 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import "tailwindcss";
+
+@theme {
+  /* Al definir --font-pixel, Tailwind crea automáticamente la clase .font-pixel */
+  --font-pixel: "Press Start 2P", cursive;
+  
+  /* También puedes definir tus colores aquí si quieres usarlos como clases de tailwind 
+     ej: bg-primary, text-secondary, etc. Esto sustituye a tus clases .bg-primary manuales */
+  --color-primary: #7836cf;
+  --color-secondary: #512092;
+}
+
+@keyframes sprite-animation {
+  from { background-position: 0px; }
+  to { background-position: var(--scroll-end); } 
+}
+
+@utility animate-sprite {
+  animation-name: sprite-animation;
+  animation-iteration-count: infinite;
+  /* La duración y los pasos los definiremos en el componente */
+}
 
 .primary {
   color: #7836cf;

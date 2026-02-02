@@ -29,3 +29,4 @@ jobs:
           PUBLIC_API_SYSTEM_STATUS_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/obtenerEstadoSistema
           PUBLIC_API_GET_LOCATIONS_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/obtenerTraficoGeo
           PUBLIC_API_REGISTER_LOCATION_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/registrarTraficoGeo
+          PUBLIC_API_PDF_GENERATOR_URL: https://ca-pdf-generator.salmonpond-43910dee.spaincentral.azurecontainerapps.io?
