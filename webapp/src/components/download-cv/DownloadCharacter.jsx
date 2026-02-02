@@ -43,20 +43,28 @@ export default function DownloadCharacter({role}) {
     return(
         <button
             onClick={getCV}
-            disabled={isLoading} // Evita doble clic
+            disabled={isLoading}
             className={`
                 w-full 
-                bg-primary hover:bg-secondary hover:cursor-pointer
+                bg-primary hover:bg-secondary 
                 text-white 
                 rounded-full p-3 
                 font-pixel text-xs md:text-sm 
                 border-b-4 border-l-2 border-[#4a188f]
                 transition-all duration-100
                 shadow-lg
-                ${isLoading ? 'opacity-70 cursor-wait' : ''}
+                ${isLoading ? 'opacity-70' : 'hover:cursor-pointer'}
+                
             `}
         >
-            Descargar CV
+            {isLoading ? (
+                <>
+                    <div className="pixel-spinner"></div>
+                    <span>GENERANDO...</span>
+                </>
+            ) : (
+                "Descargar CV"
+            )}
         </button>
     )
 }
