@@ -36,7 +36,7 @@ export default function SelectCV(){
         },
         data: {
             name: 'Data Engineer',
-            img: '//characters/data.png',
+            img: '/characters/data.png',
             color: 'bg-green-600',
             stats: {
                 "Python": 60,
