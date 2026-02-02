@@ -14,7 +14,7 @@ export default function SelectCV(){
     const charactersConfig = {
         generic:{
             name: 'General',
-            img: '/src/assets/characters/generic.png',
+            img: '/characters/generic.png',
             color: 'bg-blue-600',
             stats: {
                 "Resolución Problemas": 95,
@@ -25,7 +25,7 @@ export default function SelectCV(){
         },
         devops: {
             name: 'DevOps',
-            img: '/src/assets/characters/devops.png',
+            img: '/characters/devops.png',
             color: 'bg-white-600',
             stats: {
                 "Azure / Cloud": 90,
@@ -36,7 +36,7 @@ export default function SelectCV(){
         },
         data: {
             name: 'Data Engineer',
-            img: '/src/assets/characters/data.png',
+            img: '//characters/data.png',
             color: 'bg-green-600',
             stats: {
                 "Python": 60,
@@ -47,7 +47,7 @@ export default function SelectCV(){
         },
         sysadmin: {
             name: 'SysAdmin',
-            img: '/src/assets/characters/sysadmin.png',
+            img: '/characters/sysadmin.png',
             color: 'bg-red-600',
             stats: {
                 "Linux / Bash": 90,
@@ -59,7 +59,7 @@ export default function SelectCV(){
         },
         developer: {
             name: 'Developer',
-            img: '/src/assets/characters/developer.png',
+            img: '/characters/developer.png',
             color: 'bg-yellow-600',
             stats: {
                 "Backend (JS, Python)": 92,
