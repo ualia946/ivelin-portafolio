@@ -23,10 +23,10 @@ jobs:
           output_location: "dist"
 
         env:
-          PUBLIC_API_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/actualizarvisitas
-          PUBLIC_API_CHATBOT_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/obtenerRespuestaChatBot
-          PUBLIC_API_INFRAESTRUCTURE_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/obtenerInfraestructura
-          PUBLIC_API_SYSTEM_STATUS_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/obtenerEstadoSistema
-          PUBLIC_API_GET_LOCATIONS_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/obtenerTraficoGeo
-          PUBLIC_API_REGISTER_LOCATION_URL: https://func-portfolio-api-fyio6s.azurewebsites.net/api/registrarTraficoGeo
-          PUBLIC_API_PDF_GENERATOR_URL: https://ca-pdf-generator.salmonpond-43910dee.spaincentral.azurecontainerapps.io/generate-pdf?
+          PUBLIC_API_URL: https://apim-portfolio-ivelin.azure-api.net/azure-functions/actualizarvisitas
+          PUBLIC_API_CHATBOT_URL: https://apim-portfolio-ivelin.azure-api.net/azure-functions/obtenerRespuestaChatBot
+          PUBLIC_API_INFRAESTRUCTURE_URL: https://apim-portfolio-ivelin.azure-api.net/azure-functions/obtenerInfraestructura
+          PUBLIC_API_SYSTEM_STATUS_URL: https://apim-portfolio-ivelin.azure-api.net/azure-functions/obtenerEstadoSistema
+          PUBLIC_API_GET_LOCATIONS_URL: https://apim-portfolio-ivelin.azure-api.net/azure-functions/obtenerTraficoGeo
+          PUBLIC_API_REGISTER_LOCATION_URL: https://apim-portfolio-ivelin.azure-api.net/azure-functions/registrarTraficoGeo
+          PUBLIC_API_PDF_GENERATOR_URL: https://apim-portfolio-ivelin.azure-api.net/pdf-service/generate-pdf?

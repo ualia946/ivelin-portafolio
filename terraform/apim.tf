@@ -8,6 +8,9 @@ resource "azurerm_api_management" "apim" {
   sku_name = "Consumption_0"
 }
 
+# ==============================================================================
+# Azure Functions API (Node.js)
+# ==============================================================================
 resource "azurerm_api_management_api" "api_functions" {
     name = "functions-api"
     resource_group_name = azurerm_resource_group.rg-webapp.name
@@ -19,6 +22,30 @@ resource "azurerm_api_management_api" "api_functions" {
     path = "azure-functions"
     service_url = "https://${azurerm_function_app_flex_consumption.function-app.default_hostname}/api"
 
+    subscription_required = false
+
+}
+
+resource "azurerm_api_management_api_operation" "ops_functions_get" {
+  operation_id        = "all-functions-get"
+  api_name            = azurerm_api_management_api.api_functions.name
+  api_management_name = azurerm_api_management.apim.name
+  resource_group_name = azurerm_resource_group.rg-webapp.name
+  display_name        = "All Functions (GET)"
+  method              = "GET"
+  url_template        = "/*"
+  description         = "Paso a través para GET"
+}
+
+resource "azurerm_api_management_api_operation" "ops_functions_post" {
+  operation_id        = "all-functions-post"
+  api_name            = azurerm_api_management_api.api_functions.name
+  api_management_name = azurerm_api_management.apim.name
+  resource_group_name = azurerm_resource_group.rg-webapp.name
+  display_name        = "All Functions (POST)"
+  method              = "POST"
+  url_template        = "/*"
+  description         = "Paso a través para POST"
 }
 
 resource "azurerm_api_management_api_policy" "policy_functions" {
@@ -61,6 +88,10 @@ resource "azurerm_api_management_api_policy" "policy_functions" {
 XML
 }
 
+# ==============================================================================
+# FastAPI pdf-service
+# ==============================================================================
+
 resource "azurerm_api_management_api" "api_pdf_service" {
     name = "pdf-service"
     resource_group_name = azurerm_resource_group.rg-webapp.name
@@ -72,7 +103,30 @@ resource "azurerm_api_management_api" "api_pdf_service" {
     path = "pdf-service"
     service_url = "https://${azurerm_container_app.pdf_service.ingress[0].fqdn}"
 
+    subscription_required = false
+
 }
+
+resource "azurerm_api_management_api_operation" "generate-pdf" {
+  operation_id = "generate-pdf"
+  api_name = azurerm_api_management_api.api_pdf_service.name
+  api_management_name = azurerm_api_management.apim.name
+  resource_group_name = azurerm_resource_group.rg-webapp.name
+
+  display_name = "Generar PDF CV"
+  method = "GET"
+
+  url_template = "/generate-pdf"
+  request {
+    query_parameter {
+      name = "target_role"
+      type = "string"
+      required = false
+      description = "Rol para personalizar CV"
+    }
+  }
+}
+
 
 resource "azurerm_api_management_api_policy" "policy_pdf_service" {
   api_name = azurerm_api_management_api.api_pdf_service.name
