@@ -39,3 +39,9 @@ variable "cosmos_db_endpoint" {
    type = string
    sensitive = true
  }
+
+ variable "pfx_password" {
+   description = "Contraseña para el archivo pfx del certificado SSL"
+   type = string
+   sensitive = true
+ }

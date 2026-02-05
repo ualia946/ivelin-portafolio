@@ -39,3 +39,4 @@ prueba-ia/
 .terraform.lock.hcl
 .terraform.tfvars
 /terraform/terraform.tfvars
+/terraform/cloudflare

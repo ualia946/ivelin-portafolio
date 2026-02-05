@@ -6,6 +6,14 @@ resource "azurerm_api_management" "apim" {
   publisher_email = "2004ivchoapostolov@gmail.com"
   
   sku_name = "Consumption_0"
+
+  hostname_configuration {
+    proxy {
+      host_name = "api.ivelinapostolov.com"
+      certificate = filebase64("${path.module}/cloudflare/certificado_api.pfx")
+      certificate_password = var.pfx_password
+    }
+  }
 }
 
 # ==============================================================================
