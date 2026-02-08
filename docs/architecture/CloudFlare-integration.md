@@ -6,7 +6,7 @@ Esta arquitectura representa una solución híbrida de entrega de contenido y pr
 
 El sistema desacopla el **Frontend** (contenido estático) del **Backend** (servicios de API), utilizando **Cloudflare** como capa de unificación, seguridad y distribución global (Edge Network).
 
-![Diagrama de Arquitectura](../images/CloudflareIntegration.png)
+![Diagrama de Arquitectura](../../images/CloudflareIntegration.png)
 
 ---
 
