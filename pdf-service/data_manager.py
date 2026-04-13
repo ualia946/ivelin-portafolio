@@ -6,9 +6,9 @@ MY_FULL_CV = UserCVData(
     location="Almería, España",
     phone="+34 633 35 28 14", 
     email="2004ivchoapostolov@gmail.com",
-    linkedin_url="https://linkedin.com/in/ivelin-apostolov", # Asegúrate de que este sea correcto
+    linkedin_url="https://www.linkedin.com/in/ivelin-apostolov-a7a48a359/", # Asegúrate de que este sea correcto
     github_url="https://github.com/ualia946",
-    summary="Ingeniero Informático especializado en Cloud Computing (Azure), DevOps y Automatización. Experto en diseñar arquitecturas Serverless seguras, gestionar infraestructura como código (IaC) y construir soluciones de IA generativa (RAG) integradas con pipelines de datos. Apasionado por la eficiencia operativa (FinOps) y la calidad del software (QA Automation).",
+    summary="Ingeniero Informático especializado en Cloud Computing (Azure), DevOps y Automatización. Con experiencia en diseño de arquitecturas Serverless seguras, gestionar infraestructura como código (IaC) y construir soluciones de IA generativa (RAG) integradas con pipelines de datos. Apasionado por la eficiencia operativa (FinOps) y la calidad del software (QA Automation).",
     
     education=[
         Education(
@@ -25,6 +25,11 @@ MY_FULL_CV = UserCVData(
             institution="British Council", 
             degree="English Level C1 Certificate", 
             year="2023"
+        ),
+        Education(
+            institution="Búlgaro", 
+            degree="Nativo",
+            year= "2004-2026"
         )
     ],
 
@@ -83,11 +88,10 @@ MY_FULL_CV = UserCVData(
         Experience(
             project_name="Plataforma Cloud-Native Serverless & IA Generativa",
             achievements=[
-                "Arquitectura 100% automatizada con Terraform (IaC) en Azure, integrando Azure Functions, Cosmos DB y Static Web Apps.",
-                "Implementación de sistema RAG (Retrieval-Augmented Generation) con búsqueda vectorial (MongoDB vCore) para asistencia técnica mediante IA.",
-                "Estrategia FinOps: Pipeline ETL diario para extracción de costes y visualización embebida con Power BI.",
-                "Sistema de observabilidad en tiempo real utilizando Azure Resource Graph y visualización de tráfico global 3D.",
-                "Aseguramiento de la calidad (QA) mediante pipelines CI/CD con tests End-to-End automatizados (Playwright)."
+                "Automaticé al 100% la infraestructura con Terraform (IaC), integrando Azure Functions, Cosmos DB y Static Web Apps.",
+                "Desarrollé un asistente personal virtual (RAG) apoyado en MongoDB vCore y la API de Gemini para resolver consultas en tiempo real.",
+                "Optimicé los costes en la nube (FinOps) implementando un pipeline ETL diario con visualización en Power BI.",
+                "Eliminé los errores de despliegue automatizando al 100% los tests End-to-End con Playwright en pipelines CI/CD."
             ],
             stack=["azure", "terraform", "rag", "python", "fastapi", "node.js", "cosmos db", "power bi", "playwright", "github actions", "finops"]
         ),
@@ -96,9 +100,9 @@ MY_FULL_CV = UserCVData(
         Experience(
             project_name="Infraestructura Escalable con Kubernetes (AKS)",
             achievements=[
-                "Despliegue de clústeres Kubernetes auto-reparables gestionados con Terraform para alta disponibilidad.",
-                "Reducción del tiempo de entrega de software mediante pipelines CI/CD automatizados en GitHub Actions.",
-                "Implementación de modelo de seguridad Zero Trust intra-cluster y monitorización centralizada con Prometheus/Grafana."
+                "Aseguré la alta disponibilidad de 5 aplicaciones críticas desplegando clústeres AKS auto-reparables con Terraform.",
+                "Reduje la entrega de software de horas a minutos mediante pipelines CI/CD 100% automatizados en GitHub Actions.",
+                "Minimicé la superficie de ataque con seguridad Zero Trust intra-cluster y monitorización en tiempo real (Prometheus/Grafana)."
             ],
             stack=["kubernetes", "aks", "docker", "terraform", "devops", "security", "prometheus", "grafana", "azure"]
         ),
@@ -107,9 +111,9 @@ MY_FULL_CV = UserCVData(
         Experience(
             project_name="Administración de Sistemas Linux & Redes Seguras",
             achievements=[
-                "Diseño de topologías de red seguras con segmentación de subredes y Firewalls virtuales (MikroTik).",
-                "Gestión de almacenamiento resiliente (RAID 5/10, LVM) y automatización de backups críticos con Bash.",
-                "Desarrollo de scripts de administración para la gestión desatendida de recursos."
+                "Protegí los servicios críticos diseñando una topología de red con subredes aisladas y firewalls virtuales (MikroTik).",
+                "Garanticé la integridad de datos mediante almacenamiento resiliente (RAID 5/10, LVM) y backups 100% automatizados con Bash.",
+                "Reduje los tiempos de operación desarrollando scripts para la gestión desatendida de servidores y recursos."
             ],
             stack=["linux", "sysadmin", "bash", "networking", "firewall", "storage", "scripting"]
         ),
@@ -118,9 +122,9 @@ MY_FULL_CV = UserCVData(
         Experience(
             project_name="Arquitectura Web Segura & Identity Management",
             achievements=[
-                "Automatización del despliegue de componentes de infraestructura complejos mediante módulos de Terraform.",
-                "Eliminación de credenciales hardcodeadas mediante la implementación estricta de Managed Identities.",
-                "Adopción de metodología GitOps para auditoría y control de versiones de la infraestructura."
+                "Desplegué más de 15 componentes de infraestructura sin errores manuales utilizando módulos de Terraform.",
+                "Mitigué riesgos de seguridad eliminando credenciales hardcodeadas mediante el uso de Identidades Administradas.",
+                "Establecí un control total de versiones y auditoría de la infraestructura adoptando la metodología GitOps."
             ],
             stack=["azure", "terraform", "iam", "gitops", "security", "identity"]
         )
@@ -211,4 +215,3 @@ if __name__ == "__main__":
     print(f"SysAdmin: {len(cv_sysadmin.experience)} experiencias")
     for exp in cv_sysadmin.experience:
         print(f" - {exp.project_name}")
-    
