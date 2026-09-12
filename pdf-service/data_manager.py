@@ -1,147 +1,123 @@
-from schemas import UserCVData, Experience, Education, SkillCategory, SkillSubcategory
+from schemas import UserCVData, WorkExperience, Highlight, Experience, Education, SkillCategory
 
 MY_FULL_CV = UserCVData(
     fullname="Ivelin Apostolov",
-    role="Ingeniero Informático | Cloud, DevOps & Sistemas",
+    role="Ingeniero Informático | Data, IoT & Cloud Computing",
     location="Almería, España",
-    phone="+34 633 35 28 14", 
+    phone="+34 633 35 28 14",
     email="2004ivchoapostolov@gmail.com",
-    linkedin_url="https://www.linkedin.com/in/ivelin-apostolov-a7a48a359/", # Asegúrate de que este sea correcto
+    linkedin_url="https://www.linkedin.com/in/ivelin-apostolov-a7a48a359/",
     github_url="https://github.com/ualia946",
-    summary="Ingeniero Informático especializado en Cloud Computing (Azure), DevOps y Automatización. Con experiencia en diseño de arquitecturas Serverless seguras, gestionar infraestructura como código (IaC) y construir soluciones de IA generativa (RAG) integradas con pipelines de datos. Apasionado por la eficiencia operativa (FinOps) y la calidad del software (QA Automation).",
-    
+    web_url="https://www.ivelinapostolov.com/",
+    summary="Ingeniero Informático con experiencia práctica en el desarrollo de soluciones IoT, arquitecturas de datos y observabilidad. Especializado en diseñar pipelines desde la recolección de datos en hardware (ESP32, C++) hasta su almacenamiento e integración con algoritmos de optimización en Python. Complementado con sólidos conocimientos en arquitecturas Cloud (Azure), automatización e infraestructura como código.",
+
+    # Experiencia laboral real: se muestra en todos los perfiles, no se filtra por rol
+    work_experience=[
+        WorkExperience(
+            company="Universidad de Almería (Grupo de Investigación COSIE)",
+            location="Almería, España",
+            position="Investigador en Prácticas - IoT & Data Engineer",
+            period="Mayo 2026 - Actualidad",
+            description="Desarrollo de un sistema de monitorización IoT y optimización energética para las aulas universitarias, buscando el equilibrio entre el confort térmico/ambiental y la reducción del gasto eléctrico.",
+            achievements=[
+                Highlight(
+                    title="Desarrollo de Firmware (C++/PlatformIO)",
+                    text="Programación de microcontroladores ESP32 para la recolección de datos (CO2, temperatura, PIR). Implementé un sistema de resiliencia usando memoria flash y búferes temporales para retener datos durante caídas de red y enviarlos al recuperar la conexión."
+                ),
+                Highlight(
+                    title="Pipeline de Datos & Infraestructura",
+                    text="Diseñé y desplegué en local mediante Docker un stack de recolección de datos en tiempo real compuesto por Mosquitto (MQTT), Telegraf e InfluxDB."
+                ),
+                Highlight(
+                    title="Observabilidad (Grafana)",
+                    text="Creación de dashboards definidos como código (JSON) para monitorizar tres pilares: variables ambientales, telemetría y salud de los nodos, y consumo energético (integrando dispositivos Shelly en cuadros eléctricos)."
+                ),
+                Highlight(
+                    title="Algoritmia y Optimización (Python)",
+                    text="Desarrollo actual de un algoritmo genético alimentado por datos de sensores, horarios académicos y clima exterior (API de AEMET) para generar planes diarios automatizados de HVAC (aire acondicionado), minimizando el coste energético y el disconfort."
+                )
+            ]
+        )
+    ],
+
     education=[
         Education(
-            institution="Universidad de Almería", 
-            degree="Grado en Ingeniería Informática (Mención TI)", 
-            year="2022-2026"
+            institution="Universidad de Almería",
+            degree="Grado en Ingeniería Informática (Mención TI)",
+            year="2022 - 2026"
         ),
         Education(
-            institution="Microsoft", 
-            degree="Azure Fundamentals (AZ-900)", 
+            institution="Microsoft Certified",
+            degree="Azure Fundamentals (AZ-900)",
             year="2025"
         ),
         Education(
-            institution="British Council", 
-            degree="English Level C1 Certificate", 
+            institution="Inglés",
+            degree="Nivel C1 (British Council)",
             year="2023"
         ),
         Education(
-            institution="Búlgaro", 
+            institution="Búlgaro",
             degree="Nativo",
-            year= "2004-2026"
+            year=""
         )
     ],
 
     skills=[
         SkillCategory(
-            category_name="Cloud & DevOps (Azure)",
-            skills=[
-                SkillSubcategory(
-                    subcategory_name="Computación & Serverless", 
-                    keywords=["Azure Functions", "Static Web Apps", "Container Apps", "Kubernetes (AKS)", "Docker"]
-                ),
-                SkillSubcategory(
-                    subcategory_name="IaC & CI/CD", 
-                    keywords=["Terraform", "GitHub Actions", "Bicep", "Playwright (E2E Testing)"]
-                ),
-                SkillSubcategory(
-                    subcategory_name="Seguridad & Gobierno", 
-                    keywords=["Managed Identities", "RBAC", "Zero Trust", "Azure Entra ID", "VNet"]
-                )
-            ]
+            category_name="Lenguajes",
+            keywords=["Python", "C++", "JavaScript/Node.js", "Bash Scripting"]
         ),
         SkillCategory(
-            category_name="Backend & Data Engineering",
-            skills=[
-                SkillSubcategory(
-                    subcategory_name="Desarrollo", 
-                    keywords=["Python (FastAPI)", "Node.js", "JavaScript", "React", "Astro"]
-                ),
-                SkillSubcategory(
-                    subcategory_name="Bases de Datos & IA", 
-                    keywords=["Cosmos DB (Mongo vCore & NoSQL)", "Vector Search", "RAG Architecture", "Google Gemini API"]
-                ),
-                SkillSubcategory(
-                    subcategory_name="Observabilidad", 
-                    keywords=["Azure Resource Graph", "Log Analytics", "Grafana", "Prometheus"]
-                )
-            ]
+            category_name="Data & IoT",
+            keywords=["InfluxDB", "MQTT (Mosquitto)", "Telegraf", "Grafana", "PlatformIO", "ESP32"]
         ),
         SkillCategory(
-            category_name="Sistemas & Linux",
-            skills=[
-                SkillSubcategory(
-                    subcategory_name="Administración", 
-                    keywords=["Bash Scripting", "Cron", "LVM", "RAID", "Windows Server"]
-                ),
-                SkillSubcategory(
-                    subcategory_name="Redes", 
-                    keywords=["TCP/IP", "DNS", "Nginx", "Firewall (iptables/MikroTik)", "Routing"]
-                )
-            ]
+            category_name="Cloud & DevOps",
+            keywords=["Azure", "Docker", "Kubernetes (Nociones básicas)", "Terraform", "GitHub Actions"]
+        ),
+        SkillCategory(
+            category_name="Bases de Datos & IA",
+            keywords=["Cosmos DB", "MongoDB vCore", "Integración de LLMs (RAG)"]
         )
     ],
 
+    # Proyectos: se filtran por rol según el campo `stack` (ver get_tailored_cv)
     experience=[
-        # PROYECTO ESTRELLA: El Portafolio Completo (Combina todo lo que hemos hecho)
         Experience(
-            project_name="Plataforma Cloud-Native Serverless & IA Generativa",
+            project_name="Portfolio Web Interactivo (Arquitectura Serverless & IA en Azure)",
             achievements=[
-                "Automaticé al 100% la infraestructura con Terraform (IaC), integrando Azure Functions, Cosmos DB y Static Web Apps.",
-                "Desarrollé un asistente personal virtual (RAG) apoyado en MongoDB vCore y la API de Gemini para resolver consultas en tiempo real.",
-                "Optimicé los costes en la nube (FinOps) implementando un pipeline ETL diario con visualización en Power BI.",
-                "Eliminé los errores de despliegue automatizando al 100% los tests End-to-End con Playwright en pipelines CI/CD."
+                "Diseñé y desplegué una arquitectura cloud-native en Azure para mi web personal, gestionando la infraestructura íntegramente con Terraform (Azure Functions, Cosmos DB, Static Web Apps).",
+                "Desarrollé un backend (Python/FastAPI, Node.js) que integra un asistente virtual basado en arquitectura RAG, utilizando MongoDB vCore y la API de Gemini para la resolución de consultas en tiempo real.",
+                "Implementé pipelines de CI/CD con GitHub Actions y tests End-to-End automatizados con Playwright."
             ],
-            stack=["azure", "terraform", "rag", "python", "fastapi", "node.js", "cosmos db", "power bi", "playwright", "github actions", "finops"]
+            highlighted_tech=["Terraform", "Azure", "FastAPI", "Gemini API", "RAG", "Playwright"],
+            stack=["azure", "terraform", "iac", "serverless", "azure functions", "cosmos db", "mongodb", "nosql", "python", "fastapi", "node.js", "javascript", "api", "rest", "rag", "llm", "gemini", "ai", "github actions", "ci/cd", "playwright", "cloud", "devops", "data"]
         ),
 
-        # EXPERIENCIA 2: K8s (Del PDF)
         Experience(
-            project_name="Infraestructura Escalable con Kubernetes (AKS)",
+            project_name="Laboratorio de Sistemas e Infraestructura Segura",
+            note="Agrupación de prácticas de laboratorio y entornos locales.",
             achievements=[
-                "Aseguré la alta disponibilidad de 5 aplicaciones críticas desplegando clústeres AKS auto-reparables con Terraform.",
-                "Reduje la entrega de software de horas a minutos mediante pipelines CI/CD 100% automatizados en GitHub Actions.",
-                "Minimicé la superficie de ataque con seguridad Zero Trust intra-cluster y monitorización en tiempo real (Prometheus/Grafana)."
+                "Configuración de entornos aplicando principios de Infraestructura como Código (Terraform) y metodologías GitOps.",
+                "Despliegue de servicios en contenedores (Docker) y comprensión práctica de los conceptos de orquestación básica y alta disponibilidad mediante Kubernetes.",
+                "Administración de sistemas Linux, automatización de tareas y copias de seguridad con Bash, y configuración de topologías de red seguras (Firewalls, Nginx)."
             ],
-            stack=["kubernetes", "aks", "docker", "terraform", "devops", "security", "prometheus", "grafana", "azure"]
-        ),
-
-        # EXPERIENCIA 3: SysAdmin (Del PDF)
-        Experience(
-            project_name="Administración de Sistemas Linux & Redes Seguras",
-            achievements=[
-                "Protegí los servicios críticos diseñando una topología de red con subredes aisladas y firewalls virtuales (MikroTik).",
-                "Garanticé la integridad de datos mediante almacenamiento resiliente (RAID 5/10, LVM) y backups 100% automatizados con Bash.",
-                "Reduje los tiempos de operación desarrollando scripts para la gestión desatendida de servidores y recursos."
-            ],
-            stack=["linux", "sysadmin", "bash", "networking", "firewall", "storage", "scripting"]
-        ),
-
-        # EXPERIENCIA 4: Arquitectura Web Base (Del PDF)
-        Experience(
-            project_name="Arquitectura Web Segura & Identity Management",
-            achievements=[
-                "Desplegué más de 15 componentes de infraestructura sin errores manuales utilizando módulos de Terraform.",
-                "Mitigué riesgos de seguridad eliminando credenciales hardcodeadas mediante el uso de Identidades Administradas.",
-                "Establecí un control total de versiones y auditoría de la infraestructura adoptando la metodología GitOps."
-            ],
-            stack=["azure", "terraform", "iam", "gitops", "security", "identity"]
+            stack=["linux", "sysadmin", "sistemas", "bash", "scripting", "backup", "networking", "redes", "firewall", "nginx", "terraform", "iac", "gitops", "docker", "containers", "kubernetes", "k8s", "devops", "security"]
         )
     ]
 )
 
 # --- LÓGICA DE NEGOCIO ---
 def get_tailored_cv(target_role: str) -> UserCVData:
-    
+
     if target_role == 'generic': return MY_FULL_CV
 
     cv_result = MY_FULL_CV.model_copy(deep=True)
     role_definitions = {
-        
+
         # PERFIL 1: DEVOPS & CLOUD ENGINEER
         "devops": [
-            # Tu Core actual
             "devops", "cloud", "azure", "kubernetes", "k8s", "aks", "docker", "containers",
             "terraform", "iac", "bicep", "helm", "github actions", "ci/cd", "pipelines",
             "bash", "linux", "scripting", "gitops", "argocd", "prometheus", "grafana",
@@ -152,20 +128,21 @@ def get_tailored_cv(target_role: str) -> UserCVData:
         "sysadmin": [
             "sysadmin", "sistemas", "linux", "debian", "ubuntu", "windows server",
             "bash", "shell", "scripting", "cron", "powershell",
-            "redes", "networking", "tcp/ip", "dns", "dhcp", "vpn", "firewall", 
+            "redes", "networking", "tcp/ip", "dns", "dhcp", "vpn", "firewall",
             "iptables", "mikrotik", "routing", "raid", "lvm", "storage", "backup",
             "security", "ssh", "active directory", "monitorización",
             "vmware", "virtualization", "ansible", "nagios", "zabbix", "apache", "nginx"
         ],
 
-        # PERFIL 3: DATA ENGINEER & BI
+        # PERFIL 3: DATA ENGINEER, IoT & BI
         "data": [
             "data", "datos", "data engineer", "etl", "business intelligence", "bi",
             "power bi", "dax", "power bi embedded", "visualización",
             "sql", "sql server", "cosmos db", "nosql", "mongodb", "vector database",
-            "azure functions", "serverless", 
-            "python", "pandas", "numpy", "spark", "databricks", "azure data factory", 
-            "synapse", "snowflake", "big data", "data warehouse"
+            "azure functions", "serverless",
+            "python", "pandas", "numpy", "spark", "databricks", "azure data factory",
+            "synapse", "snowflake", "big data", "data warehouse",
+            "iot", "mqtt", "mosquitto", "telegraf", "influxdb", "grafana", "esp32", "platformio", "time series"
         ],
 
         # PERFIL 4: FULL STACK / BACKEND DEVELOPER
@@ -188,7 +165,7 @@ def get_tailored_cv(target_role: str) -> UserCVData:
 
         if common_elements:
             filtered_experience.append(exp)
-    
+
     cv_result.experience = filtered_experience
 
     return cv_result
@@ -196,22 +173,8 @@ def get_tailored_cv(target_role: str) -> UserCVData:
 if __name__ == "__main__":
     print("--- TEST DE FILTRADO ---")
 
-    # Caso 1: Todo
-    cv_gen = get_tailored_cv("generic")
-    print(f"Generic: {len(cv_gen.experience)} experiencias")
-
-    # Caso 2: DevOps
-    cv_devops = get_tailored_cv("devops")
-    print(f"DevOps: {len(cv_devops.experience)} experiencias")
-    # Debería mostrarte los nombres de los proyectos que ha guardado
-    for exp in cv_devops.experience:
-        print(f"  - {exp.project_name}")
-
-    # Caso 3: Data
-    cv_data = get_tailored_cv("data")
-    print(f"Data: {len(cv_data.experience)} experiencias")
-
-    cv_sysadmin = get_tailored_cv("sysadmin")
-    print(f"SysAdmin: {len(cv_sysadmin.experience)} experiencias")
-    for exp in cv_sysadmin.experience:
-        print(f" - {exp.project_name}")
+    for role in ["generic", "devops", "sysadmin", "data", "developer"]:
+        cv = get_tailored_cv(role)
+        print(f"{role}: {len(cv.work_experience)} exp. profesional, {len(cv.experience)} proyectos")
+        for exp in cv.experience:
+            print(f"  - {exp.project_name}")
