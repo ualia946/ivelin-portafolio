@@ -2,41 +2,41 @@ from schemas import UserCVData, WorkExperience, Highlight, Experience, Education
 
 MY_FULL_CV = UserCVData(
     fullname="Ivelin Apostolov",
-    role="Ingeniero Informático | Data, IoT & Cloud Computing",
+    role="Data Engineering & Cloud | Estudiante de último curso de Ingeniería Informática",
     location="Almería, España",
     phone="+34 633 35 28 14",
     email="2004ivchoapostolov@gmail.com",
     linkedin_url="https://www.linkedin.com/in/ivelin-apostolov-a7a48a359/",
     github_url="https://github.com/ualia946",
     web_url="https://www.ivelinapostolov.com/",
-    summary="Ingeniero Informático con experiencia práctica en el desarrollo de soluciones IoT, arquitecturas de datos y observabilidad. Especializado en diseñar pipelines desde la recolección de datos en hardware (ESP32, C++) hasta su almacenamiento e integración con algoritmos de optimización en Python. Complementado con sólidos conocimientos en arquitecturas Cloud (Azure), automatización e infraestructura como código.",
+    summary="Estudiante de Ingeniería Informática con solo el TFG pendiente, orientado a construir pipelines de datos de principio a fin y la infraestructura cloud que los sostiene, incluida la integración de modelos de lenguaje mediante RAG. Antes de elegir tecnología, analizo el problema y lo que realmente se necesita. Después diseño pensando en lo que puede fallar en condiciones reales: que no se pierdan datos si cae la red, que el sistema sea observable y que cualquier entorno pueda reconstruirse con infraestructura como código y CI/CD. Busco incorporarme a un equipo de ingeniería de datos, cloud o IA, con disponibilidad a partir de diciembre de 2026.",
 
     # Experiencia laboral real: se muestra en todos los perfiles, no se filtra por rol
     work_experience=[
         WorkExperience(
-            company="Universidad de Almería (Grupo de Investigación COSIE)",
-            location="Almería, España",
-            position="Investigador en Prácticas - IoT & Data Engineer",
-            period="Mayo 2026 - Actualidad",
-            description="Desarrollo de un sistema de monitorización IoT y optimización energética para las aulas universitarias, buscando el equilibrio entre el confort térmico/ambiental y la reducción del gasto eléctrico.",
+            company="Grupo de Investigación COSIE, Universidad de Almería",
+            position="Investigador en Prácticas · Ingeniería de Datos e IoT",
+            period="Mayo 2026 – Actualidad",
+            description="Sistema de monitorización y optimización energética para decidir cómo climatizar las aulas de la universidad, equilibrando el confort de los estudiantes y el gasto eléctrico.",
             achievements=[
                 Highlight(
-                    title="Desarrollo de Firmware (C++/PlatformIO)",
-                    text="Programación de microcontroladores ESP32 para la recolección de datos (CO2, temperatura, PIR). Implementé un sistema de resiliencia usando memoria flash y búferes temporales para retener datos durante caídas de red y enviarlos al recuperar la conexión."
+                    title="Datos fiables aunque falle la red",
+                    text="Los nodos de las aulas pierden la conexión de forma puntual, lo que dejaría huecos en los datos. Diseñé el firmware de los ESP32 para guardar las lecturas en memoria flash y reenviarlas al reconectar, sin pérdidas durante los cortes."
                 ),
                 Highlight(
-                    title="Pipeline de Datos & Infraestructura",
-                    text="Diseñé y desplegué en local mediante Docker un stack de recolección de datos en tiempo real compuesto por Mosquitto (MQTT), Telegraf e InfluxDB."
+                    title="Ingesta en tiempo real y reproducible",
+                    text="Había que recoger de forma continua las lecturas de los nodos repartidos por las aulas. Elegí MQTT, un protocolo ligero pensado para dispositivos con pocos recursos, y una base de datos de series temporales. Desplegué todo en contenedores para poder replicarlo en cualquier servidor."
                 ),
                 Highlight(
-                    title="Observabilidad (Grafana)",
-                    text="Creación de dashboards definidos como código (JSON) para monitorizar tres pilares: variables ambientales, telemetría y salud de los nodos, y consumo energético (integrando dispositivos Shelly en cuadros eléctricos)."
+                    title="Visibilidad de todo el sistema",
+                    text="Sin monitorización, un nodo caído o un consumo anómalo pasarían inadvertidos. Definí como código dashboards de Grafana para tres frentes: condiciones de las aulas, salud de los nodos y consumo eléctrico, medido con dispositivos Shelly en los cuadros eléctricos."
                 ),
                 Highlight(
-                    title="Algoritmia y Optimización (Python)",
-                    text="Desarrollo actual de un algoritmo genético alimentado por datos de sensores, horarios académicos y clima exterior (API de AEMET) para generar planes diarios automatizados de HVAC (aire acondicionado), minimizando el coste energético y el disconfort."
+                    title="Del dato a la decisión",
+                    text="Decidir cuándo y cómo climatizar cada aula obliga a equilibrar confort y coste entre una enorme cantidad de combinaciones posibles. Estoy desarrollando un algoritmo genético en Python que combina datos de sensores, horarios académicos y la previsión de AEMET para generar planes diarios de climatización."
                 )
-            ]
+            ],
+            technologies=["C++ (ESP32, PlatformIO)", "MQTT (Mosquitto)", "Telegraf", "InfluxDB", "Grafana", "Docker", "Python", "API de AEMET"]
         )
     ],
 
@@ -44,66 +44,63 @@ MY_FULL_CV = UserCVData(
         Education(
             institution="Universidad de Almería",
             degree="Grado en Ingeniería Informática (Mención TI)",
-            year="2022 - 2026"
+            year="2022 – Actualidad",
+            note="Asignaturas completadas; pendiente únicamente el Trabajo de Fin de Grado. Disponibilidad a partir de diciembre de 2026."
         ),
         Education(
-            institution="Microsoft Certified",
-            degree="Azure Fundamentals (AZ-900)",
+            institution="Microsoft",
+            degree="Microsoft Certified: Azure Fundamentals (AZ-900)",
             year="2025"
-        ),
-        Education(
-            institution="Inglés",
-            degree="Nivel C1 (British Council)",
-            year="2023"
-        ),
-        Education(
-            institution="Búlgaro",
-            degree="Nativo",
-            year=""
         )
     ],
 
+    languages=["Español (nativo/bilingüe)", "Búlgaro (nativo)", "Inglés (C1, British Council, 2023)"],
+
     skills=[
         SkillCategory(
-            category_name="Lenguajes",
-            keywords=["Python", "C++", "JavaScript/Node.js", "Bash Scripting"]
+            category_name="Datos",
+            keywords=["Python", "pipelines de ingesta", "MQTT", "Telegraf", "InfluxDB", "Grafana", "Power BI"]
         ),
         SkillCategory(
-            category_name="Data & IoT",
-            keywords=["InfluxDB", "MQTT (Mosquitto)", "Telegraf", "Grafana", "PlatformIO", "ESP32"]
+            category_name="Cloud y DevOps",
+            keywords=["Azure", "Terraform", "Docker", "GitHub Actions", "CI/CD", "Linux", "Bash", "Nginx", "Kubernetes (nivel básico)"]
         ),
         SkillCategory(
-            category_name="Cloud & DevOps",
-            keywords=["Azure", "Docker", "Kubernetes (Nociones básicas)", "Terraform", "GitHub Actions"]
+            category_name="IA",
+            keywords=["RAG", "bases de datos vectoriales", "integración de LLMs (Gemini API)"]
         ),
         SkillCategory(
-            category_name="Bases de Datos & IA",
-            keywords=["Cosmos DB", "MongoDB vCore", "Integración de LLMs (RAG)"]
+            category_name="Otros",
+            keywords=["C++", "ESP32", "JavaScript/Node.js"]
         )
     ],
 
     # Proyectos: se filtran por rol según el campo `stack` (ver get_tailored_cv)
     experience=[
         Experience(
-            project_name="Portfolio Web Interactivo (Arquitectura Serverless & IA en Azure)",
+            project_name="Portfolio web: plataforma personal en Azure con IA y control de costes",
+            url="https://www.ivelinapostolov.com/",
+            description="Web para presentarme que funciona también como demostración práctica de cómo diseño, despliego y opero un sistema en cloud.",
             achievements=[
-                "Diseñé y desplegué una arquitectura cloud-native en Azure para mi web personal, gestionando la infraestructura íntegramente con Terraform (Azure Functions, Cosmos DB, Static Web Apps).",
-                "Desarrollé un backend (Python/FastAPI, Node.js) que integra un asistente virtual basado en arquitectura RAG, utilizando MongoDB vCore y la API de Gemini para la resolución de consultas en tiempo real.",
-                "Implementé pipelines de CI/CD con GitHub Actions y tests End-to-End automatizados con Playwright."
+                Highlight(
+                    title="Un CV para cada búsqueda",
+                    text="Cada reclutador busca un perfil distinto, y un único CV genérico no encaja con todos. Desarrollé un microservicio que ofrece la versión del CV adaptada al perfil que busca el visitante."
+                ),
+                Highlight(
+                    title="Un asistente que no se inventa nada",
+                    text="Un modelo de lenguaje que responde sobre mí puede dar datos falsos. Convertí el contenido del CV en vectores en una base de datos vectorial, de forma que el asistente solo responde con información que aparece en él."
+                ),
+                Highlight(
+                    title="Control del coste de la infraestructura",
+                    text="En cloud el gasto puede crecer sin que nadie lo note. Programé tareas que recogen cada día el coste de cada recurso de Azure y lo muestran en un panel de Power BI publicado en la propia web."
+                ),
+                Highlight(
+                    title="Infraestructura reproducible y a la vista",
+                    text="Toda la infraestructura está definida con Terraform y se despliega con CI/CD y tests end-to-end automáticos, así que cada cambio se verifica antes de publicarse. La propia web muestra todos los componentes que la forman."
+                )
             ],
-            highlighted_tech=["Terraform", "Azure", "FastAPI", "Gemini API", "RAG", "Playwright"],
-            stack=["azure", "terraform", "iac", "serverless", "azure functions", "cosmos db", "mongodb", "nosql", "python", "fastapi", "node.js", "javascript", "api", "rest", "rag", "llm", "gemini", "ai", "github actions", "ci/cd", "playwright", "cloud", "devops", "data"]
-        ),
-
-        Experience(
-            project_name="Laboratorio de Sistemas e Infraestructura Segura",
-            note="Agrupación de prácticas de laboratorio y entornos locales.",
-            achievements=[
-                "Configuración de entornos aplicando principios de Infraestructura como Código (Terraform) y metodologías GitOps.",
-                "Despliegue de servicios en contenedores (Docker) y comprensión práctica de los conceptos de orquestación básica y alta disponibilidad mediante Kubernetes.",
-                "Administración de sistemas Linux, automatización de tareas y copias de seguridad con Bash, y configuración de topologías de red seguras (Firewalls, Nginx)."
-            ],
-            stack=["linux", "sysadmin", "sistemas", "bash", "scripting", "backup", "networking", "redes", "firewall", "nginx", "terraform", "iac", "gitops", "docker", "containers", "kubernetes", "k8s", "devops", "security"]
+            highlighted_tech=["Azure (Functions, Static Web Apps, Cosmos DB for MongoDB vCore)", "Terraform", "Python (FastAPI)", "Node.js", "Gemini API", "Power BI", "GitHub Actions", "Playwright"],
+            stack=["azure", "terraform", "iac", "serverless", "azure functions", "cosmos db", "mongodb", "nosql", "vector database", "python", "fastapi", "node.js", "javascript", "api", "rest", "rag", "llm", "gemini", "ai", "power bi", "bi", "monitorización", "github actions", "ci/cd", "playwright", "cloud", "devops", "data"]
         )
     ]
 )

@@ -136,76 +136,99 @@
     </header>
 
     <section id="summary">
-        <h2 class="section-title">Resumen Profesional</h2>
+        <h2 class="section-title">Perfil</h2>
         <p style="text-align: justify;">{{ data.summary }}</p>
     </section>
 
     {% if data.work_experience %}
     <section id="work-experience">
-        <h2 class="section-title">Experiencia Profesional</h2>
+        <h2 class="section-title">Experiencia</h2>
 
         {% for job in data.work_experience %}
             <article class="experience-item">
                 <header class="experience-header">
-                    <h3 class="project-title">{{ job.company }} | {{ job.location }}</h3>
+                    <h3 class="project-title">{{ job.position }}</h3>
                     <span class="experience-period">{{ job.period }}</span>
                 </header>
 
-                <span class="experience-subtitle">{{ job.position }}</span>
+                <span class="experience-subtitle">{{ job.company }}{% if job.location %} | {{ job.location }}{% endif %}</span>
 
                 <p class="experience-description">{{ job.description }}</p>
 
                 <ul>
                     {% for achieve in job.achievements %}
-                        <li><b>{{ achieve.title }}:</b> {{ achieve.text }}</li>
+                        <li><b>{{ achieve.title }}.</b> {{ achieve.text }}</li>
                     {% endfor %}
                 </ul>
+
+                {% if job.technologies %}
+                    <span class="stack-list">
+                        Tecnologías: {{ job.technologies | join(', ') }}
+                    </span>
+                {% endif %}
             </article>
         {% endfor %}
     </section>
     {% endif %}
 
+    {% if data.experience %}
     <section id="experience">
-        <h2 class="section-title">Proyectos Técnicos Destacados</h2>
+        <h2 class="section-title">Proyectos</h2>
 
         {% for exp in data.experience %}
             <article class="experience-item">
                 <header class="experience-header">
                     <h3 class="project-title">{{ exp.project_name }}</h3>
+                    {% if exp.url %}
+                        <a class="experience-period" href="{{ exp.url }}">{{ exp.url | replace('https://', '') | replace('www.', '') | trim('/') }}</a>
+                    {% endif %}
                 </header>
 
                 {% if exp.note %}
                     <span class="project-note">Nota: {{ exp.note }}</span>
                 {% endif %}
 
+                {% if exp.description %}
+                    <p class="experience-description">{{ exp.description }}</p>
+                {% endif %}
+
                 <ul>
                     {% for achieve in exp.achievements %}
-                        <li>{{ achieve }}</li>
+                        <li><b>{{ achieve.title }}.</b> {{ achieve.text }}</li>
                     {% endfor %}
                 </ul>
 
                 {% if exp.highlighted_tech %}
                     <span class="stack-list">
-                        Tecnologías destacadas: {{ exp.highlighted_tech | join(', ') }}
+                        Tecnologías: {{ exp.highlighted_tech | join(', ') }}
                     </span>
                 {% endif %}
             </article>
         {% endfor %}
     </section>
+    {% endif %}
 
     <section id="education">
         <h2 class="section-title">Educación y Certificaciones</h2>
         <ul>
             {% for e in data.education %}
                 <li>
-                    <strong>{{ e.institution }}</strong>: {{ e.degree }}{% if e.year %} | {{ e.year }}{% endif %}
+                    <strong>{{ e.degree }}</strong>, {{ e.institution }}{% if e.year %} | {{ e.year }}{% endif %}
+                    {% if e.note %}<br><span>{{ e.note }}</span>{% endif %}
                 </li>
             {% endfor %}
         </ul>
     </section>
 
+    {% if data.languages %}
+    <section id="languages">
+        <h2 class="section-title">Idiomas</h2>
+        <p>{{ data.languages | join(' · ') }}</p>
+    </section>
+    {% endif %}
+
     <section id="skills">
-        <h2 class="section-title">Habilidades Técnicas</h2>
+        <h2 class="section-title">Habilidades</h2>
         <ul>
             {% for skillCategory in data.skills %}
                 <li>

@@ -10,16 +10,19 @@ class Highlight(BaseModel):
 
 class WorkExperience(BaseModel):
     company: str
-    location: str
     position: str
     period: str
     description: str
     achievements: List[Highlight]
+    technologies: Optional[List[str]] = None
+    location: Optional[str] = None
 
 class Experience(BaseModel):
     project_name: str
-    achievements: List[str]
+    achievements: List[Highlight]
     stack: List[str]
+    description: Optional[str] = None
+    url: Optional[str] = None
     note: Optional[str] = None
     highlighted_tech: Optional[List[str]] = None
 
@@ -27,6 +30,7 @@ class Education(BaseModel):
     institution: str
     degree: str
     year: str
+    note: Optional[str] = None
 
 class SkillCategory(BaseModel):
     category_name: str
@@ -46,6 +50,7 @@ class UserCVData(BaseModel):
     work_experience: List[WorkExperience]
     experience: List[Experience]
     education: List[Education]
+    languages: List[str]
     skills: List[SkillCategory]
 
 
